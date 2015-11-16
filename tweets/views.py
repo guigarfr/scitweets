@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # from django.contrib import messages
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from braces.views import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy
 from django.contrib import messages
@@ -10,6 +10,11 @@ from django.shortcuts import redirect
 from . import models
 from . import forms
 from accounts.views import MenuContextMixin
+
+
+class TweetListView(ListView):
+    model = models.Tweet
+    template_name = 'tweets/list.html'
 
 
 class CreateAnswerView(LoginRequiredMixin, MenuContextMixin, CreateView):
