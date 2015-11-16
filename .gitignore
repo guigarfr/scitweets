@@ -1,6 +1,5 @@
 venv
 *.pyc
-static
 .env
 db.sqlite3.old
 db.sqlite3
