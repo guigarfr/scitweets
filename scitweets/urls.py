@@ -23,7 +23,7 @@ from accounts.views import DashboardView
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^home/', TemplateView.as_view(template_name='home.html'), name="home"),
+    url(r'^$', DashboardView.as_view()),
     url(r'^dashboard/', DashboardView.as_view(), name="dashboard"),
     url(r'^tweets/', include('tweets.urls', namespace="tweets")),
     url(r'^admin/', include(admin.site.urls)),
