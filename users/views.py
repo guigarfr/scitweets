@@ -51,7 +51,7 @@ class LogoutView(RedirectView):
     """
     Provides users the ability to logout
     """
-    url = '/auth/login/'
+    url = '/users/login/'
 
     def get(self, request, *args, **kwargs):
         auth_logout(request)

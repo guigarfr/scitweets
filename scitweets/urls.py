@@ -25,6 +25,6 @@ urlpatterns = [
     url(r'^science_tweets/', include('portal.urls', namespace="science_tweets")),
     url(r'^tweets/', include('tweets.urls', namespace="tweets")),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^auth/', include('users.urls', namespace="users")),
+    url(r'^users/', include('users.urls', namespace="users")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
