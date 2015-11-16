@@ -1,0 +1,6 @@
+CHOICES = ['Yes', 'No', 'Inclasificable']
+from django import forms
+
+class ResultForm(forms.Form):
+    result = forms.CharField(label="result", choices=CHOICES, widget=forms.RadioSelect)
+

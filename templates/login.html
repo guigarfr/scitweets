@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block page_title %}
+    {% trans 'Base Menu' %}
+{% endblock %}
+
+{% block meta_description %}
+    {{ block.super }}
+{% endblock %}
+{% block meta_author %}
+    {{ block.super }}
+{% endblock meta_author %}
+
+{% block meta %}
+    {{ block.super }}
+{% endblock meta %}
+
+{% block cdn_css %}
+    {{ block.super }}
+{% endblock cdn_css %}
+
+{% block css %}
+    {{ block.super }}
+{% endblock css %}
+
+{% block body_class %}
+    {{ block.super }}
+{% endblock %}
+
+{% block body_attributes %}
+    {{ block.super }}
+{% endblock body_attributes %}
+
+{% block header %}
+{% endblock header %}
+
+{% block main %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="post">
+                            <fieldset>
+                                {% csrf_token %}
+                                {% if next %}
+                                    <input type="hidden" name="next" value="{{ next }}" />
+                                {% endif %}
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="username" name="username"  placeholder="{% trans 'Username' %}" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="password" id="password" placeholder="{% trans 'Password' %}">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="{% trans 'Login' %}"/>
+                                <!--<a type="submit" class="btn btn-lg btn-success btn-block">Login</a>-->
+                            </fieldset>
+                        </form>
+                        <!--<form role="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="{{ form.username.label_tag }}" name="email" type="email" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="{{ form.password.label_tag }}" name="password" type="password" value="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                &lt;!&ndash; Change this to a button or input when using this as a form &ndash;&gt;
+                                <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
+                            </fieldset>
+                        </form>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock main %}

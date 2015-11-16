@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.core.urlresolvers import reverse
+from django.views import generic
+#from django.contrib import messages
+from django.shortcuts import render_to_response
+from django.db.models import Count
+from django.utils.encoding import smart_text
+from django.views.generic import CreateView
+
+from polls.models import Question, TweetAnswer
+from .forms import TweetQuestionForm
+from django.template import RequestContext
+from django import forms
+from accounts.models import UserProfile
+
+class CreateAnswerView(CreateView):
+	
+	model = TweetAnswer
+	fields = ['tweet', 'result', 'user']
+	template_name = 'vote.html'
+	success_url = '/polls'
+	
+	tweet = None
+	
+	def get_form(self, form_class):
+		NA_YES_NO = ((None, 'Inclasificable'), (True, 'Sí'), (False, 'No'))
+		form = super(CreateAnswerView, self).get_form(form_class)
+		form.fields['tweet'].widget = forms.HiddenInput()
+		form.fields['result'].widget = forms.RadioSelect()
+		form.fields['result'].widget.choices = NA_YES_NO
+		form.fields['user'].widget = forms.HiddenInput()
+		return form
+	
+	def get_initial(self):
+		# Get first unanswered tweet
+		print "Estructura CreateAnswerView:", dir(self)
+		print "Usuario:", self.request.user, type(self.request.user)
+		initials = dict()
+		# Intento obtener usuario
+		try:
+			the_user = UserProfile.objects.get(user=self.request.user)
+		except UserProfile.DoesNotExist:
+			print "User:", self.request.user, "not found"
+			pass
+		else:
+			tweets_with_answer = set(TweetAnswer.objects.filter(user=the_user).values_list('tweet', flat=True))
+			question_unanswered = Question.objects.exclude(pk__in=tweets_with_answer).first()
+			self.tweet = question_unanswered
+			print "Tweet:", question_unanswered
+			initials = {
+				"tweet": question_unanswered,
+				"result": None,
+				"user": the_user,
+			}
+		return initials
+	
+	def get_context_data(self, *args, **kwargs):
+		context = super(CreateAnswerView, self).get_context_data(*args, **kwargs)
+		context['object'] = self.tweet
+		return context
+			
+        
+
