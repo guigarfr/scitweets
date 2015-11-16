@@ -22,7 +22,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^home/', TemplateView.as_view(template_name='home.html'), name="home"),
-    url(r'^science_tweets/', include('portal.urls', namespace="science_tweets")),
     url(r'^tweets/', include('tweets.urls', namespace="tweets")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^users/', include('users.urls', namespace="users")),
