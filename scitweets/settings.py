@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'djangobower',
     'compressor',
-    'users',
+    'accounts',
     'tweets',
 )
 
@@ -74,8 +74,8 @@ LOGGING = {
     }
 }
 
-LOGIN_URL = '/users/login/'
-AUTH_PROFILE_MODULE = 'users.UserProfile'
+LOGIN_URL = '/accounts/login/'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 REDIRECT_FIELD_NAME = 'next'
 
 

@@ -18,12 +18,15 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 
+from accounts.views import DashboardView
+
 from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^home/', TemplateView.as_view(template_name='home.html'), name="home"),
+    url(r'^dashboard/', DashboardView.as_view(), name="dashboard"),
     url(r'^tweets/', include('tweets.urls', namespace="tweets")),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^users/', include('users.urls', namespace="users")),
+    url(r'^accounts/', include('accounts.urls', namespace="accounts")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

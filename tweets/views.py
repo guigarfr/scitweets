@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 
 from . import models
 from . import forms
-from users.views import MenuContextMixin
+from accounts.views import MenuContextMixin
 
 
 class CreateAnswerView(LoginRequiredMixin, MenuContextMixin, CreateView):

@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ('accounts', '0001_initial'),
     ]
 
     operations = [
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('result', models.NullBooleanField()),
                 ('tweet', models.ForeignKey(to='tweets.Question')),
-                ('user', models.ForeignKey(to='users.UserProfile')),
+                ('user', models.ForeignKey(to='accounts.UserProfile')),
             ],
         ),
         migrations.AlterUniqueTogether(

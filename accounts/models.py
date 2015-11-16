@@ -8,7 +8,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
 
     class Meta:
-        app_label = 'users'
+        app_label = 'accounts'
 
     # Other fields here
     def __unicode__(self):

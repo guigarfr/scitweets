@@ -14,7 +14,7 @@ class ScienceTweetUserInline(admin.StackedInline):
 
 # Define a new User admin
 class UserAdmin(UserAdmin):
-    inlines = [ScienceTweetUserInline]
+    inlines = [ScienceTweetUserInline, ]
 
 
 # Re-register UserAdmin

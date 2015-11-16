@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tweetyesnoanswer',
             name='user',
-            field=models.ForeignKey(related_query_name=b'answer', related_name='answers', to='users.UserProfile'),
+            field=models.ForeignKey(related_query_name=b'answer', related_name='answers', to='accounts.UserProfile'),
         ),
     ]

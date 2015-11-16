@@ -3,7 +3,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-from users.models import UserProfile
+from accounts.models import UserProfile
 from .managers import TweetManager
 
 
