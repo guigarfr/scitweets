@@ -74,8 +74,8 @@ LOGGING = {
     }
 }
 
-LOGIN_URL = '/accounts/login/'
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+LOGIN_URL = '/users/login/'
+AUTH_PROFILE_MODULE = 'users.UserProfile'
 REDIRECT_FIELD_NAME = 'next'
 
 
