@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load staticfiles %}
+{% load common_tags %}
 
 {% block page_title %}
     {{ block.super }} {{ _("Tweet List") }}
@@ -37,12 +38,16 @@
 {% block content %}
 <div class="container">
 
-    {% trans 'Tweet list' as default_page_header %}
+    {% trans 'Voted tweet list' as default_page_header %}
     <h1 class="page-header">{{ page_header|default:default_page_header }}</h1>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            {% trans 'List of loaded tweets' as default_panel_header %}
+            {% captureas default_panel_header %}
+                {% blocktrans %}
+                List of tweets voted by {{ user.username }}
+                {% endblocktrans %}
+            {% endcaptureas %}
             {{ panel_header|default:default_panel_header }}
         </div>
         <!-- /.panel-heading -->
@@ -51,6 +56,7 @@
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr>
+                            <th>{% trans 'Voting date' %}</th>
                             <th>{% trans 'Twitter ID' %}</th>
                             <th>{% trans 'Tweet' %}</th>
                             <th>{% trans 'Scientific' %}</th>
@@ -59,9 +65,10 @@
                     <tbody>
                     {% for object in object_list %}
                         <tr>
-                            <td>{{ object.id_twitter }} </td>
-                            <td>{{ object.text }}</td>
-                            <td>{{ object.is_scientific }}</td>
+                            <td>{{ object.created }} </td>
+                            <td>{{ object.tweet.id_twitter }} </td>
+                            <td>{{ object.tweet.text }}</td>
+                            <td>{{ object.result|yesno:'Yes,No,Unknown' }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

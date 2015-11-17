@@ -17,6 +17,11 @@ class TweetListView(ListView):
     template_name = 'tweets/list.html'
 
 
+class TweetAnswerListView(ListView):
+    model = models.TweetYesNoAnswer
+    template_name = 'tweets/answer_list.html'
+
+
 class CreateAnswerView(LoginRequiredMixin, MenuContextMixin, CreateView):
     model = models.TweetYesNoAnswer
     template_name = 'tweets/vote.html'
