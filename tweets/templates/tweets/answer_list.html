@@ -44,9 +44,11 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             {% captureas default_panel_header %}
-                {% blocktrans %}
-                List of tweets voted by {{ user.username }}
-                {% endblocktrans %}
+                {% with user.username as username %}
+                    {% blocktrans %}
+                    List of tweets voted by {{ username }}
+                    {% endblocktrans %}
+                {% endwith %}
             {% endcaptureas %}
             {{ panel_header|default:default_panel_header }}
         </div>
