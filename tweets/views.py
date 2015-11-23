@@ -18,11 +18,14 @@ class TweetListView(ListView):
     model = models.Tweet
     template_name = 'tweets/list.html'
 
+    # TODO: Agrupar por question, y poner cada una en una caja? o poner columna question
+
 
 class HashtagListView(ListView):
     model = models.Hashtag
     template_name = 'tweets/list_hashtag.html'
 
+    # TODO: Agrupar por question, y poner cada una en una caja? o poner columna question
 
 
 class TweetAnswerListView(ListView):
@@ -31,7 +34,7 @@ class TweetAnswerListView(ListView):
 
     def get_queryset(self):
         tweet_type = ContentType.objects.get_for_model(models.Tweet)
-        return self.model.objects.filter(content_type=tweet_type)
+        return self.model.objects.filter(content_type=tweet_type, user=self.request.user.profile)
 
     def get_context_data(self, **kwargs):
         context = {
@@ -47,7 +50,7 @@ class HashtagAnswerListView(ListView):
 
     def get_queryset(self):
         hashtag_type = ContentType.objects.get_for_model(models.Hashtag)
-        return self.model.objects.filter(content_type=hashtag_type)
+        return self.model.objects.filter(content_type=hashtag_type, user=self.request.user.profile)
 
     def get_context_data(self, **kwargs):
         context = {
