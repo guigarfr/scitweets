@@ -238,26 +238,50 @@
                             {% trans 'Dashboard' %}
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{% url 'tweets:tweet_question_list' %}">
+                            <i class="fa fa-bar-chart-o fa-fw"></i>
+                            {% trans 'Questions' %}
+                        </a>
+                    </li>
+
                     <li>
                         <a href="#">
-                            <i class="fa fa-bar-chart-o fa-fw"></i>
+                            <i class="fa fa-twitter fa-fw"></i>
                             {% trans 'Tweets' %}
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{% url 'tweets:list' %}">
+                                <a href="{% url 'tweets:tweet_list' %}">
                                     {% trans 'List' %}
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'tweets:vote' %}">
-                                    {% trans 'Vote' %}
+                                <a href="{% url 'tweets:tweets_voted' %}">
+                                    {% trans 'Voted' %}
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-slack fa-fw"></i>
+                            {% trans 'Hashtags' %}
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{% url 'tweets:hashtag_list' %}">
+                                    {% trans 'List' %}
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'tweets:voted' %}">
-                                    {% trans 'Voted Tweets' %}
+                                <a href="{% url 'tweets:hashtags_voted' %}">
+                                    {% trans 'Voted' %}
                                 </a>
                             </li>
                         </ul>

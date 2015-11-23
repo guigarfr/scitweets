@@ -13,13 +13,24 @@ class TweetQuerySet(models.QuerySet):
 
     def answered_by_user(self, user=None):
         if user is None:
-            return self
-        return self.filter(answer__user=user)
+            return self.none()
+        return self.filter(answers__user=user)
 
     def unanswered_by_user(self, user=None):
         if user is None:
-            return self
-        return self.exclude(answer__user=user)
+            return self.none()
+        return self.exclude(answers__user=user)
+
+    def next_unanswered_by_user(self, user=None):
+        if user is None:
+            return self.none()
+        return self.unanswered_by_user(user).first()
+
+    def next_unanswered_by_user2(self, user=None):
+        if user is None:
+            return self.none()
+        return self.unanswered_by_user2(user).first()
+
 
 
 class TweetManager(models.Manager):

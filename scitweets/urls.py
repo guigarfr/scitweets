@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^$', DashboardView.as_view()),
     url(r'^dashboard/', DashboardView.as_view(), name="dashboard"),
-    url(r'^tweets/', include('tweets.urls', namespace="tweets")),
+    url(r'^tweets/', include('tweets.urls', namespace="tweets", app_name='tweets')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('accounts.urls', namespace="accounts")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

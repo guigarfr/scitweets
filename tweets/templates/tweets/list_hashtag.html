@@ -2,7 +2,6 @@
 
 {% load i18n %}
 {% load staticfiles %}
-{% load common_tags %}
 
 {% block page_title %}
     {{ block.super }} {{ _("Tweet List") }}
@@ -38,18 +37,12 @@
 {% block content %}
 <div class="container">
 
-    {% trans 'Voted tweet list' as default_page_header %}
+    {% trans 'Hashtag list' as default_page_header %}
     <h1 class="page-header">{{ page_header|default:default_page_header }}</h1>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            {% captureas default_panel_header %}
-                {% with user.username as username %}
-                    {% blocktrans %}
-                    List of tweets voted by {{ username }}
-                    {% endblocktrans %}
-                {% endwith %}
-            {% endcaptureas %}
+            {% trans 'List of hashtags' as default_panel_header %}
             {{ panel_header|default:default_panel_header }}
         </div>
         <!-- /.panel-heading -->
@@ -58,25 +51,14 @@
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr>
-                            <th>{% trans 'Voting date' %}</th>
-                            {% if tweet %}
-                            <th>{% trans 'Twitter ID' %}</th>
-                            <th>{% trans 'Tweet' %}</th>
-                            {% endif %}
-                            {% if hashtag %}
+                            <th>{% trans 'Creation date' %}</th>
                             <th>{% trans 'Hashtag' %}</th>
-                            {% endif %}
-                            <th>{% trans 'My answer' %}</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for object in object_list %}
                         <tr>
                             <td>{{ object.created }} </td>
-                            {% if tweet %}
-                            <td>{{ object.content_object.id_twitter }} </td>
-                            {% endif %}
-                            <td>{{ object.content_object }}</td>
                             <td>{{ object }}</td>
                         </tr>
                     {% endfor %}

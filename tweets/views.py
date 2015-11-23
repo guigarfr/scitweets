@@ -7,9 +7,11 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
+from django.contrib.contenttypes.models import ContentType
+
 from . import models
 from . import forms
-from accounts.views import MenuContextMixin
+from accounts.views import ScitweetsContextMixin
 
 
 class TweetListView(ListView):
@@ -17,43 +19,108 @@ class TweetListView(ListView):
     template_name = 'tweets/list.html'
 
 
+class HashtagListView(ListView):
+    model = models.Hashtag
+    template_name = 'tweets/list_hashtag.html'
+
+
+
 class TweetAnswerListView(ListView):
-    model = models.TweetYesNoAnswer
+    model = models.Answer
     template_name = 'tweets/answer_list.html'
 
+    def get_queryset(self):
+        tweet_type = ContentType.objects.get_for_model(models.Tweet)
+        return self.model.objects.filter(content_type=tweet_type)
 
-class CreateAnswerView(LoginRequiredMixin, MenuContextMixin, CreateView):
-    model = models.TweetYesNoAnswer
+    def get_context_data(self, **kwargs):
+        context = {
+            'tweet': True
+        }
+        context.update(kwargs)
+        return super(TweetAnswerListView, self).get_context_data(**context)
+
+
+class HashtagAnswerListView(ListView):
+    model = models.Answer
+    template_name = 'tweets/answer_list.html'
+
+    def get_queryset(self):
+        hashtag_type = ContentType.objects.get_for_model(models.Hashtag)
+        return self.model.objects.filter(content_type=hashtag_type)
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'hashtag': True
+        }
+        context.update(kwargs)
+        return super(HashtagAnswerListView, self).get_context_data(**context)
+
+
+
+class QuestionListView(ListView):
+    model = models.Question
+    template_name = 'tweets/question-list.html'
+
+
+class CreateAnswerView(LoginRequiredMixin, ScitweetsContextMixin, CreateView):
+    model = models.Answer
     template_name = 'tweets/vote.html'
-    form_class = forms.TweetQuestionForm
+    form_class = forms.CreateAnswerForm
     redirect_unauthenticated_users = True
-    tweet = None
+    question = None
+    about_object = None
+    about_object_class = None
+    object = None
+
+    def dispatch(self, request, *args, **kwargs):
+        # Get question to answer to
+        question_id = self.kwargs.get("question_id")
+        try:
+            self.question = models.Question.objects.get(id=question_id)
+        except:
+            raise ValueError("There is no question with id " + str(question_id))
+
+        # Get first unanswered tweet or hashtag
+        self.about_object_class = self.question.content_type.model_class()
+        self.about_object = self.about_object_class.objects.exclude(answers__user=request.user.profile).first()
+
+        return super(CreateAnswerView, self).dispatch(request, *args, **kwargs)
 
     def get_initial(self):
-        # Get first unanswered tweet
+        print "Object about:", self.about_object
         initials = dict()
-        first_unanswered_tweet = models.Tweet.objects.all().unanswered_by_user(self.request.user.profile).first()
-        self.tweet = first_unanswered_tweet
-        print "Tweet:", first_unanswered_tweet
-        initials = {
-            "tweet": first_unanswered_tweet,
-            "result": None,
-        }
+        if self.about_object:
+            initials.update({
+                "object_id": self.about_object.pk,
+                "question": self.question,
+            })
+
+            initials.update(super(CreateAnswerView, self).get_initial())
+
         return initials
 
     def get_success_url(self):
-        return reverse('tweets:vote')
+        return reverse('tweets:tweet_answer_new', kwargs={
+            'question_id': self.question.pk
+        })
 
     def form_valid(self, form):
         tweet_answer = form.save(commit=False)
         tweet_answer.user = self.request.user.profile
+        # tweet_answer.question = self.question
+        # tweet_answer.object_id = self.about_object.pk
+        tweet_answer.value_type = self.question.answer_value_type
+        tweet_answer.content_type = self.question.content_type
         tweet_answer.save()
         return redirect(self.get_success_url())
 
     def get_context_data(self, *args, **kwargs):
         context = super(CreateAnswerView, self).get_context_data(*args, **kwargs)
-        context['tweet'] = self.tweet
-        context['unanswered_count'] = models.Tweet.objects.all().unanswered_by_user(self.request.user.profile).count()
-        context['answered_count'] = models.Tweet.objects.all().answered_by_user(self.request.user.profile).count()
-        assert(models.Tweet.objects.all().count() == (context['unanswered_count'] + context['answered_count']))
+        context['question'] = self.question
+        context['object'] = self.about_object
+        context['unanswered_count'] = self.about_object_class.objects.exclude(answers__user=self.request.user.profile).count()
+        context['answered_count'] = self.about_object_class.objects.filter(answers__user=self.request.user.profile).count()
+        assert(self.about_object_class.objects.all().count() == (context['unanswered_count'] + context['answered_count']))
         return context
+

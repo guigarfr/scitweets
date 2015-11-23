@@ -14,66 +14,39 @@
 <div class="row">
     <div class="col-lg-8">
         <div class="panel panel-default">
-            {% with question.content_type as object_name %}
-            <div class="panel-heading">
-                {% blocktrans %}
-                    Vote this {{ object_name }}
-                {% endblocktrans %}
-            </div>
+            <div class="panel-heading">{% trans 'Vote this tweet' %}</div>
             <div class="panel-body">
-                {% if not object %}
-                    <h1>All {{ object_name }}s have been voted</h1>
+                {% if not tweet %}
+                    <h1>All tweets have been voted</h1>
                 {% else %}
-                    <h2>{{ object }}</h2>
+                    <h2>{{ tweet.text }}</h2>
 
                     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
+                    <form action="" method="post">{% csrf_token %}
+                        {{form.as_p}}
+                    </form>
                     <div class="wrapper text-center">
-                        <p>{{ question.question }}</p>
-                        <br>
-
-                        {% with question.answer_value_type as value_type %}
-                            <form action="" method="post">{% csrf_token %}
-
-                                {% for field in form.hidden_fields %}
-                                    {{ field }}
-                                {% endfor %}
-
-                                {% if value_type == 0 %}
-                                    <div class="form-group text-center">
-                                        {{ form.value_int }}
-                                    </div>
-                                {% elif value_type == 1 %}
-                                    <div class="form-group text-center">
-                                        {{ form.value_str }}
-                                    </div>
-                                {% elif value_type == 2 %}
-                                    <div class="btn-group text-center">
-                                        <button id='select-yes'
-                                                class="btn btn-success btn-circle btn-xl"
-                                                type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button id='select-na'
-                                                class="btn btn-warning btn-circle btn-xl"
-                                                type="button">
-                                            <i class="fa fa-question"></i>
-                                        </button>
-                                        <button id='select-no'
-                                                class="btn btn-danger btn-circle btn-xl"
-                                                type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                {% else %}
-                                    ### {% trans "Error: Unknown value type" %} ###
-                                {% endif %}
-                        </form>
-                        {% endwith %}
+                        <p>¿Crees que este Tweet habla de ciencia?</p>
+                        <div class="btn-group text-center">
+                            <button id='select-yes'
+                                    class="btn btn-success btn-circle btn-xl"
+                                    type="button">
+                                <i class="fa fa-check"></i>
+                            </button>
+                            <button id='select-na'
+                                    class="btn btn-warning btn-circle btn-xl"
+                                    type="button">
+                                <i class="fa fa-question"></i>
+                            </button>
+                            <button id='select-no'
+                                    class="btn btn-danger btn-circle btn-xl"
+                                    type="button">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
                     </div>
                 {% endif %}
             </div>
-            {% endwith %}
             <!-- /.panel-body-->
         </div>
     </div>
@@ -161,15 +134,15 @@
     <script type='text/javascript'>
         //Send Form using buttons
         $("#select-yes").click(function() {
-            $("input[name='value_bool']").val("1");
+            $("input[name='result']").val("1");
             $("form").submit()
         });
         $("#select-no").click(function() {
-            $("input[name='value_bool']").val("0");
+            $("input[name='result']").val("0");
             $("form").submit()
         });
         $("#select-na").click(function() {
-            $("input[name='value_bool']").val("");
+            $("input[name='result']").val("");
             $("form").submit()
         });
     </script>

@@ -18,8 +18,7 @@ from django.http import HttpResponseRedirect
 from .forms import UserCreateForm
 
 
-
-class MenuContextMixin(object):
+class ScitweetsContextMixin(object):
 
     def get_context_data(self, **kwargs):
         context = dict()
@@ -35,7 +34,7 @@ class MenuContextMixin(object):
         tasks.append({
             'name': ugettext_lazy("Vote Tweets"),
             'percentage': percentage_tweets,
-            'href': reverse('tweets:vote')
+            'href': reverse("tweets:tweet_question_list")
         })
         context['tasks'] = tasks
 
@@ -43,10 +42,10 @@ class MenuContextMixin(object):
 
         print "Menu context: ", context
 
-        return super(MenuContextMixin, self).get_context_data(**context)
+        return context
 
 
-class DashboardView(LoginRequiredMixin, MenuContextMixin, TemplateView):
+class DashboardView(LoginRequiredMixin, ScitweetsContextMixin, TemplateView):
     template_name = 'home.html'
 
 
