@@ -97,6 +97,11 @@
                                         {% endblocktrans %}
                                     </span>
                                 </p>
+                                {% if task.description %}
+                                <p>
+                                    <i>{{ task.description }}</i>
+                                </p>
+                                {% endif %}
 
                                 <div class="progress progress-striped active">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
@@ -270,17 +275,17 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-slack fa-fw"></i>
-                            {% trans 'Hashtags' %}
+                            {% trans 'Trending Topics' %}
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{% url 'tweets:hashtag_list' %}">
+                                <a href="{% url 'tweets:trendingtopic_list' %}">
                                     {% trans 'List' %}
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'tweets:hashtags_voted' %}">
+                                <a href="{% url 'tweets:trendingtopics_voted' %}">
                                     {% trans 'Voted' %}
                                 </a>
                             </li>

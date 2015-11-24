@@ -37,12 +37,12 @@
 {% block content %}
 <div class="container">
 
-    {% trans 'Hashtag list' as default_page_header %}
+    {% trans 'Trending topic list' as default_page_header %}
     <h1 class="page-header">{{ page_header|default:default_page_header }}</h1>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            {% trans 'List of hashtags' as default_panel_header %}
+            {% trans 'List of trending topics' as default_panel_header %}
             {{ panel_header|default:default_panel_header }}
         </div>
         <!-- /.panel-heading -->
@@ -52,7 +52,7 @@
                     <thead>
                         <tr>
                             <th>{% trans 'Creation date' %}</th>
-                            <th>{% trans 'Hashtag' %}</th>
+                            <th>{% trans 'Trending topic' %}</th>
                         </tr>
                     </thead>
                     <tbody>

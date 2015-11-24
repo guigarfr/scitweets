@@ -16,6 +16,10 @@ ANSWER_VALUE_TYPES = [
     ]
 
 
+class UploadFile(models.Model):
+    file = models.FileField(upload_to='files/%Y/%m/%d')
+
+
 class UpdatedCreatedModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -39,7 +43,7 @@ class Tweet(UpdatedCreatedModel):
         return unicode(self.text)
 
 
-class Hashtag(UpdatedCreatedModel):
+class TrendingTopic(UpdatedCreatedModel):
     text = models.CharField(max_length=200, null=False, blank=False)
     answers = GenericRelation('Answer')
 
@@ -47,13 +51,13 @@ class Hashtag(UpdatedCreatedModel):
         return unicode(self).encode('utf-8')
 
     def __unicode__(self):
-        return u'#' + unicode(self.text)
+        return unicode(self.text)
 
 
 class Question(UpdatedCreatedModel):
     question = models.CharField(max_length=200, null=False, blank=False)
-    tweet_or_hashtag = models.Q(app_label='tweets', model='tweet') | models.Q(app_label='tweets', model='hashtag')
-    content_type = models.ForeignKey(ContentType, limit_choices_to=tweet_or_hashtag)
+    tweet_or_tt = models.Q(app_label='tweets', model='tweet') | models.Q(app_label='tweets', model='trendingtopic')
+    content_type = models.ForeignKey(ContentType, limit_choices_to=tweet_or_tt)
     answer_value_type = models.PositiveSmallIntegerField(null=False, blank=False, choices=ANSWER_VALUE_TYPES)
 
     def __str__(self):
@@ -67,16 +71,26 @@ class Question(UpdatedCreatedModel):
         return self.content_type.model == 'tweet'
 
     @property
-    def is_hashtag(self):
-        return self.content_type.model == 'hashtag'
+    def is_trendingtopic(self):
+        return self.content_type.model == 'trendingtopic'
+
+    def answered_by_user(self, user):
+        user_answers = Answer.objects.filter(question=self, user=user).count()
+        return user_answers
+
+    def to_answer_by_user(self, user):
+        user_answers = Answer.objects.filter(question=self, user=user).count()
+        total_objects = self.content_type.model_class().objects.all().count()
+        return total_objects - user_answers
+
 
 
 class Answer(UpdatedCreatedModel):
     user = models.ForeignKey(UserProfile, null=False, related_name='answers', related_query_name='answer')
     question = models.ForeignKey(Question, related_name='answers', related_query_name='answer')
 
-    tweet_or_hashtag = models.Q(app_label='tweets', model='tweet') | models.Q(app_label='tweets', model='hashtag')
-    content_type = models.ForeignKey(ContentType, limit_choices_to=tweet_or_hashtag)
+    tweet_or_tt = models.Q(app_label='tweets', model='tweet') | models.Q(app_label='tweets', model='trendingtopic')
+    content_type = models.ForeignKey(ContentType, limit_choices_to=tweet_or_tt)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 

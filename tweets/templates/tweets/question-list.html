@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load common_tags %}
+{% load tweets_tags %}
 
 {% block page_title %}
     {{ block.super }} {{ _("Tweet List") }}
@@ -16,8 +17,9 @@
 
     <div class="row">
         {% for object in object_list %}
+        {% with object|to_answer_by_user:user as unanswered %}
         <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
+            <div class="panel {% if unanswered = 0 %}panel-default{% else %}panel-primary{% endif %}">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
@@ -28,7 +30,7 @@
                             {% endif %}
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
+                            <div class="huge">{{ unanswered }}</div>
                             <div>to answer!</div>
                         </div>
                     </div>
@@ -36,15 +38,24 @@
                         {{ object.question }}
                     </div>
                 </div>
+                {% if unanswered %}
                 <a href="{% url 'tweets:tweet_answer_new' question_id=object.pk %}">
                     <div class="panel-footer">
-                        <span class="pull-left">Start voting</span>
+                        <span class="pull-left">{% trans "Start voting" %}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
                 </a>
+                {% else %}
+                <div class="panel-footer">
+                    <span class="pull-left">{% trans "Completed!" %}</span>
+                    <span class="pull-right"><i class="fa fa-check-circle"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+                {% endif %}
             </div>
         </div>
+        {% endwith %}
         {% endfor %}
     </div>
 

@@ -7,8 +7,8 @@ class TweetAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(models.Hashtag)
-class HashtagAdmin(admin.ModelAdmin):
+@admin.register(models.TrendingTopic)
+class TrendingTopicAdmin(admin.ModelAdmin):
     pass
 
 

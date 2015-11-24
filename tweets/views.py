@@ -14,21 +14,21 @@ from . import forms
 from accounts.views import ScitweetsContextMixin
 
 
-class TweetListView(ListView):
+class TweetListView(LoginRequiredMixin, ListView, ScitweetsContextMixin):
     model = models.Tweet
     template_name = 'tweets/list.html'
 
     # TODO: Agrupar por question, y poner cada una en una caja? o poner columna question
 
 
-class HashtagListView(ListView):
-    model = models.Hashtag
-    template_name = 'tweets/list_hashtag.html'
+class TrendingTopicListView(LoginRequiredMixin, ListView, ScitweetsContextMixin):
+    model = models.TrendingTopic
+    template_name = 'tweets/list_trendingtopic.html'
 
     # TODO: Agrupar por question, y poner cada una en una caja? o poner columna question
 
 
-class TweetAnswerListView(ListView):
+class TweetAnswerListView(LoginRequiredMixin, ScitweetsContextMixin, ListView):
     model = models.Answer
     template_name = 'tweets/answer_list.html'
 
@@ -44,20 +44,20 @@ class TweetAnswerListView(ListView):
         return super(TweetAnswerListView, self).get_context_data(**context)
 
 
-class HashtagAnswerListView(ListView):
+class TrendingTopicAnswerListView(LoginRequiredMixin, ScitweetsContextMixin, ListView):
     model = models.Answer
     template_name = 'tweets/answer_list.html'
 
     def get_queryset(self):
-        hashtag_type = ContentType.objects.get_for_model(models.Hashtag)
-        return self.model.objects.filter(content_type=hashtag_type, user=self.request.user.profile)
+        trendingtopic_type = ContentType.objects.get_for_model(models.TrendingTopic)
+        return self.model.objects.filter(content_type=trendingtopic_type, user=self.request.user.profile)
 
     def get_context_data(self, **kwargs):
         context = {
-            'hashtag': True
+            'trendingtopic': True
         }
         context.update(kwargs)
-        return super(HashtagAnswerListView, self).get_context_data(**context)
+        return super(TrendingTopicAnswerListView, self).get_context_data(**context)
 
 
 
@@ -84,7 +84,7 @@ class CreateAnswerView(LoginRequiredMixin, ScitweetsContextMixin, CreateView):
         except:
             raise ValueError("There is no question with id " + str(question_id))
 
-        # Get first unanswered tweet or hashtag
+        # Get first unanswered tweet or trendingtopic
         self.about_object_class = self.question.content_type.model_class()
         self.about_object = self.about_object_class.objects.exclude(answers__user=request.user.profile).first()
 

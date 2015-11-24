@@ -12,7 +12,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import CreateView, FormView, RedirectView, TemplateView
 from braces.views import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
-from tweets.models import Tweet
+from tweets.models import Tweet, Question, TrendingTopic
 from django.http import HttpResponseRedirect
 
 from .forms import UserCreateForm
@@ -24,18 +24,55 @@ class ScitweetsContextMixin(object):
         context = dict()
 
         tasks = list()
-        total_tweets = Tweet.objects.all().count()
-        voted_tweets = percentage_tweets = 0
-        if total_tweets:
-            voted_tweets = Tweet.objects.all().answered_by_user(self.request.user.profile).count()
-            if voted_tweets:
-                percentage_tweets = voted_tweets * 100 / total_tweets
 
-        tasks.append({
-            'name': ugettext_lazy("Vote Tweets"),
-            'percentage': percentage_tweets,
-            'href': reverse("tweets:tweet_question_list")
-        })
+        # Number of tweets and tts
+        total_tweets = Tweet.objects.all().count()
+        total_tts = TrendingTopic.objects.all().count()
+
+        # Vote tweets for question
+        for question in Question.objects.all():
+
+            if question.is_tweet:
+
+                if not total_tweets:
+                    continue
+
+                voted_tweets = Tweet.objects.filter(answers__user=self.request.user.profile,
+                                                    answers__question=question).count()
+
+                if voted_tweets == total_tweets:
+                    continue
+
+                percentage_voted = voted_tweets * 100 / total_tweets
+                task_name = ugettext_lazy("Vote Tweets")
+                task_desc = ugettext_lazy(question.question)
+                task_url = reverse("tweets:tweet_answer_new", kwargs={'question_id': question.pk})
+
+            elif question.is_trendingtopic:
+                if not total_tts:
+                    continue
+
+                voted_tts = TrendingTopic.objects.filter(answers__user=self.request.user.profile,
+                                                         answers__question=question).count()
+
+                if voted_tts == total_tts:
+                    continue
+
+                percentage_voted = voted_tts * 100 / total_tts
+                task_name = ugettext_lazy("Vote Trending Topics")
+                task_desc = ugettext_lazy(question.question)
+                task_url = reverse("tweets:tweet_answer_new", kwargs={'question_id': question.pk})
+
+            else:
+                raise ValueError("Contact guigarfr@gmail.com: Unknown question type")
+
+            tasks.append({
+                'name': task_name,
+                'description': task_desc,
+                'percentage': percentage_voted,
+                'href': task_url
+            })
+
         context['tasks'] = tasks
 
         context.update(kwargs)
