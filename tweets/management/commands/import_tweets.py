@@ -24,7 +24,7 @@ class Command(BaseCommand):
                     tweet_text = unicode(d['text'])
                     q, _ = Tweet.objects.get_or_create(id_twitter=int(d['id']), text=tweet_text)
 
-                    print "Created tweet with id", q.pk, q.id_tweeter
+                    print "Created tweet with id", q.pk, q.id_twitter
                     # q.save()
 
                 prefix = str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds())) + '_'
