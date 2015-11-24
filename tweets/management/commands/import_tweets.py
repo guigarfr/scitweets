@@ -22,8 +22,8 @@ class Command(BaseCommand):
 
                 for d in data:
                     tweet_text = unicode(d['text'])
-                    q = Tweet(id_twitter=int(d['id']), text=tweet_text)
-                    q.save()
+                    q, _ = Tweet.objects.get_or_create(id_twitter=int(d['id']), text=tweet_text)
+                    # q.save()
 
                 prefix = str(int((datetime.now() - datetime(1970, 1, 1)).total_seconds())) + '_'
                 os.rename(os.path.join(self.TW_DIR, f), os.path.join(self.TW_DIR, self.TW_IMPORTED, prefix + f))
