@@ -210,7 +210,7 @@ class TweetImportFormView(FormView, LoginRequiredMixin):
                                u'%(existing)d already existed in the database' % imported_tweets
             messages.success(self.request, ugettext_lazy(success_text))
         else:
-            failure_text += u'No new tweets were created.'
+            warning_text = u'No new tweets were created.'
 
         if tweet_failure_format:
             failure_text = u'There were %(failure_format)d tweets with format errors' % imported_tweets
@@ -219,6 +219,8 @@ class TweetImportFormView(FormView, LoginRequiredMixin):
 
         if failure_text:
             messages.error(self.request, ugettext_lazy(failure_text))
+        elif warning_text:
+            messages.warning(self.request, ugettext_lazy(warning_text))
 
         return tweet_imported
 
