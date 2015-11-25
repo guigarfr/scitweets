@@ -6,7 +6,6 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext
 from django import forms
 from django.contrib.staticfiles.templatetags.staticfiles import static
-import magic
 
 
 class UploadFileForm(forms.Form):
