@@ -92,7 +92,6 @@ class CreateAnswerView(LoginRequiredMixin, ScitweetsContextMixin, CreateView):
         return super(CreateAnswerView, self).dispatch(request, *args, **kwargs)
 
     def get_initial(self):
-        print "Object about:", self.about_object
         initials = dict()
         if self.about_object:
             initials.update({
@@ -149,16 +148,12 @@ class TweetImportFormView(FormView, LoginRequiredMixin):
     def parse_json_file(self, json_file):
         raw_data = json_file.read()
 
-        print "Raw", raw_data[:10]
-
         # Check if file is a correct json
         json_data = self.parse_json_text(raw_data)
 
         # File might be json data for each row
         if not json_data:
             raw_data = raw_data.split('\n')
-
-            print "Splitted:", raw_data[:3]
 
             json_data = list()
             for row_data in raw_data:

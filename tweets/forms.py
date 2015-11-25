@@ -43,9 +43,7 @@ class CreateAnswerForm(forms.ModelForm):
 
         value_fields = ['value_str', 'value_int', 'value_bool']
 
-        print dir(self), self.fields
         for name, field in self.fields.items():
-            print "Field:", field, type(field)
             if name in value_fields:
                 field.group = 2
             else:

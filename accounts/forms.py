@@ -14,7 +14,6 @@ class UserCreateForm(UserCreationForm):
         self.fields['email'].required = True
 
         for key, field in self.fields.items():
-            print field.label
             field.widget.attrs.update({
                 'class': 'form-control',
                 'placeholder': field.label
