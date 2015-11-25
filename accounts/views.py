@@ -86,10 +86,14 @@ class DashboardView(LoginRequiredMixin, ScitweetsContextMixin, TemplateView):
     template_name = 'home.html'
 
 
-class AccountRegistrationView(FormView):
+class AccountRegistrationView(CreateView):
     template_name = 'accounts/register.html'
     form_class = UserCreateForm
     success_url = reverse_lazy('dashboard')
+
+    class Meta:
+        models = User
+        fields = ('username','email','password1','password2')
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated():
@@ -98,6 +102,7 @@ class AccountRegistrationView(FormView):
 
     def form_valid(self, form):
         valid = super(AccountRegistrationView, self).form_valid(form)
+
         username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
         new_user = authenticate(username=username, password=password)
         if new_user:
