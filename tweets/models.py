@@ -15,11 +15,6 @@ ANSWER_VALUE_TYPES = [
         (2, _(u"Boolean"))
     ]
 
-
-class UploadFile(models.Model):
-    file = models.FileField(upload_to='files/%Y/%m/%d')
-
-
 class UpdatedCreatedModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

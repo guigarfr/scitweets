@@ -149,7 +149,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 STATIC_URL = '/static/'
 
-BOWER_COMPONENTS_ROOT = os.path.join(STATIC_ROOT, 'components')
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -162,9 +162,17 @@ STATICFILES_FINDERS = (
 BOWER_INSTALLED_APPS = (
     'jquery',
     'underscore',
-    'startbootstrap-sb-admin-2'
+    'startbootstrap-sb-admin-2',
+    'dropzone'
 )
 
 # Example template: http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/index.html
 
 SITE_NAME = 'scitweets'
+
+
+# needed to make this work with bootstrap labels
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}

@@ -1,5 +1,5 @@
 venv
 *.pyc
 .env
-*sqlite3*
 *.old
+components

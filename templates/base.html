@@ -268,6 +268,11 @@
                                     {% trans 'Voted' %}
                                 </a>
                             </li>
+                            <li>
+                                <a href="{% url 'tweets:tweet_import' %}">
+                                    {% trans 'Import' %}
+                                </a>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -382,22 +387,24 @@
     </nav>
 
     {% if user.is_authenticated %}
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
     {% endif %}
-    {% block content %}{% endblock content %}
+                        {% include 'snippets/messages.html' %}
+                        {% block content %}{% endblock content %}
+
     {% if user.is_authenticated %}
+                    </div>
+                    <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
+            <!-- /.container-fluid -->
         </div>
-        <!-- /.container-fluid -->
-    </div>
-    <!-- /#page-wrapper -->
+        <!-- /#page-wrapper -->
     {% endif %}
 
 </div>

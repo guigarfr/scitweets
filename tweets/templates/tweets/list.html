@@ -10,19 +10,19 @@
 {% block css %}
     {{ block.super }}
     <!-- DataTables CSS -->
-    <link href="{% static 'components/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css' %}" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="{% static 'components/bower_components/datatables-responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'datatables-responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
 {% endblock css %}
 
 {% block js %}
     {{ block.super }}
 
     <!-- DataTables JavaScript -->
-    <script src="{% static 'components/bower_components/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'datatables/media/js/jquery.dataTables.min.js' %}"></script>
 
-    <script src="{% static 'components/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>

@@ -1,0 +1,93 @@
+{% extends "home.html" %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div>
+
+    <h3>{% trans "Import tweets" %}</h3>
+
+    <br>
+
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <button type="submit" class="btn btn-icon btn-primary">
+                <i class="fa fa-check"></i>
+                {% trans "Process file" %}
+            </button>
+        </form>
+    </div>
+</div>
+
+<script language="JavaScript">
+$(document).ready(function(){
+    Dropzone.autoDiscover = false; // keep this line if you have multiple dropzones in the same page
+
+    var assets_table = $('#assets_table').find('tbody');
+    var no_assets_table = $('#no_assets_table').find('tbody');
+    function configureDropZone() {
+        $(".uploadform").dropzone({
+            url: '/affiliates_partners/distributor/csv/process',
+            maxFiles: 1, // Number of files at a time
+            maxFilesize: 1, //in MB
+            maxfilesexceeded: function(file) {
+                alert('You have uploaded more than 1 file. Only the first file will be uploaded!');
+            },
+            success: function (response) {
+                console.log("Response: " + JSON.stringify(response));
+                $('#upload_zone').hide();
+                var res = JSON.parse(response.xhr.responseText);
+                if (res.error.length > 0) {
+                    for (var i=0; i<res.error.length; i++) {
+                        var error = res.error[i];
+                        var row = $('<tr>');
+                        row.append($('<td>').append(error));
+                        no_assets_table.append(row);
+                    }
+                    $('#assets_no_ok').show();
+                    $('#upload_again').show();
+                }
+                if (res.ok.length > 0) {
+                    for (var i=0; i<res.ok.length; i++) {
+                        var ok = res.ok[i];
+                        var row = $('<tr>');
+                        row.append($('<td>').append(ok.nombre));
+                        row.append($('<td>').append(ok.contacto));
+                        row.append($('<td>').append(ok.direccion));
+                        row.append($('<td>').append(ok.telefono));
+                        row.append($('<td>').append(ok.email));
+                        row.append($('<td>').append(ok.cif_nif));
+                        row.append($('<td>').append(ok.pais));
+                        row.append($('<td>').append(ok.territorio));
+                        assets_table.append(row);
+                    }
+                    $('#assets_to_save').val(JSON.stringify(res.ok));
+                    $('#assets_ok').show();
+                    $('#save_assets').show();
+                }
+            },
+            error: function (response) {
+                alert('Ha ocurrido un error, vuelva a subir el fichero con los distribuidores.');
+                location.reload();
+            },
+            addRemoveLinks: true,
+            removedfile: function(file) {
+                var _ref; // Remove file on clicking the 'Remove file' button
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            }
+        });
+    }
+    configureDropZone();
+
+    $('#upload_again').click(function() {
+        location.reload();
+    });
+});
+</script>
+
+{% endblock %}
