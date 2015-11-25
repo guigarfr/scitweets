@@ -94,6 +94,9 @@ class Answer(UpdatedCreatedModel):
     value_str = models.CharField(max_length=100, null=True, blank=True)
     value_bool = models.NullBooleanField()
 
+    class Meta:
+        unique_together = ('user', 'question', 'content_type', 'object_id')
+
     def __str__(self):
         return unicode(self).encode('utf-8')
 
