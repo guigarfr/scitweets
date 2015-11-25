@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input name="remember" type="checkbox" value="{% trans "Remember Me" %}">{% trans "Remember Me" %}
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
@@ -68,6 +68,10 @@
                                 <!--<a type="submit" class="btn btn-lg btn-success btn-block">Login</a>-->
                             </fieldset>
                         </form>
+
+                        <div class="panel-body text-right">
+                        <a href="{% url 'accounts:register' %}">{% trans "Register" %}</a>
+                            </div>
                         <!--<form role="form">
                             <fieldset>
                                 <div class="form-group">

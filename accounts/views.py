@@ -86,7 +86,7 @@ class DashboardView(LoginRequiredMixin, ScitweetsContextMixin, TemplateView):
     template_name = 'home.html'
 
 
-class AccountRegistrationView(CreateView):
+class AccountRegistrationView(FormView):
     template_name = 'accounts/register.html'
     form_class = UserCreateForm
     success_url = reverse_lazy('dashboard')
