@@ -199,6 +199,7 @@ class TweetImportFormView(FormView, LoginRequiredMixin):
         }
 
         failure_text = []
+        warning_text = u''
         if tweet_imported:
             if not tweet_found:
                 success_text = u"%(imported)d tweets were imported from file" % imported_tweets
