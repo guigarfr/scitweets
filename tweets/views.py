@@ -198,7 +198,7 @@ class TweetImportFormView(FormView, LoginRequiredMixin):
             'failure_other': tweet_failure_other
         }
 
-        failure_text = u''
+        failure_text = []
         if tweet_imported:
             if not tweet_found:
                 success_text = u"%(imported)d tweets were imported from file" % imported_tweets
@@ -210,12 +210,12 @@ class TweetImportFormView(FormView, LoginRequiredMixin):
             warning_text = u'No new tweets were created.'
 
         if tweet_failure_format:
-            failure_text = u'There were %(failure_format)d tweets with format errors' % imported_tweets
+            failure_text.append(u'There were %(failure_format)d tweets had format errors' % imported_tweets)
         if tweet_failure_other:
-            failure_text += u' and %(failure_other)s led to unexpected errors' % imported_tweets
+            failure_text.append(u'%(failure_other)s tweets led to unexpected errors' % imported_tweets)
 
         if failure_text:
-            messages.error(self.request, ugettext_lazy(failure_text))
+            messages.error(self.request, ugettext_lazy(' and '.join(failure_text).capitalize()))
         elif warning_text:
             messages.warning(self.request, ugettext_lazy(warning_text))
 
