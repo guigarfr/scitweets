@@ -24,7 +24,7 @@ class UpdatedCreatedModel(models.Model):
 
 
 class Tweet(UpdatedCreatedModel):
-    id_twitter = models.IntegerField(blank=False, null=False)
+    id_twitter = models.BigIntegerField(blank=False, null=False)
     text = models.CharField(max_length=200)
     is_scientific = models.NullBooleanField(null=True, default=None)
     answers = GenericRelation('Answer')
