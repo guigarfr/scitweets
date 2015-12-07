@@ -13,6 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 from . import models
 from . import forms
 from accounts.views import ScitweetsContextMixin
+from lib.views import send_manually_exception_email
 
 
 class TweetListView(LoginRequiredMixin, ListView, ScitweetsContextMixin):
@@ -186,7 +187,8 @@ class TweetImportFormView(FormView, LoginRequiredMixin):
                     new_tweet = models.Tweet(id_twitter=int(tweet_id), text=unicode(tweet_text))
                     new_tweet.save()
                     tweet_imported += 1
-                except:
+                except Exception, e:
+                    send_manually_exception_email(self.request, e)
                     tweet_failure_other += 1
 
         imported_tweets = {
