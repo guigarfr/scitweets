@@ -268,11 +268,13 @@
                                     {% trans 'Voted' %}
                                 </a>
                             </li>
+                            {% if user.is_staff %}
                             <li>
                                 <a href="{% url 'tweets:tweet_import' %}">
                                     {% trans 'Import' %}
                                 </a>
                             </li>
+                            {% endif %}
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
