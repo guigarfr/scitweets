@@ -70,11 +70,21 @@
                                 {% endif %}
                         </form>
                         {% endwith %}
+                        <br>
                     </div>
                 {% endif %}
             </div>
             {% endwith %}
             <!-- /.panel-body-->
+
+            <div class="panel-footer">
+                {% if question.help_text %}
+                <small class="text-muted">
+                    {{ question.help_text }}
+                </small>
+                {% endif %}
+            </div>
+            <!-- /.panel-footer -->
         </div>
     </div>
     <div class="col-lg-4">

@@ -159,6 +159,8 @@ class LogoutView(RedirectView):
     """
     url = reverse_lazy('accounts:login')
 
+    permanent = True
+
     def get(self, request, *args, **kwargs):
         auth_logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)

@@ -9,11 +9,6 @@ from accounts.models import UserProfile
 from .managers import TweetManager
 from django.utils.translation import ugettext as _
 
-ANSWER_VALUE_TYPES = [
-        (0, _(u"Integer")),
-        (1, _(u"String")),
-        (2, _(u"Boolean"))
-    ]
 
 class UpdatedCreatedModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -50,6 +45,21 @@ class TrendingTopic(UpdatedCreatedModel):
 
 
 class Question(UpdatedCreatedModel):
+    ANSWER_VALUE_TYPES = [
+        (0, _(u"Integer")),
+        (1, _(u"String")),
+        (2, _(u"Boolean"))
+    ]
+
+    HELP_TEXTS = [
+        (0, None),
+        (1, None),
+        (2, _(u"Give your oppinion about this question. "
+              u"Answer YES or NO, or click the UNKNOWN button in case you cannot decrypt the content "
+              u"or you don't understand it. If you do, but are greatly unsure, you can also click UNKNOWN "
+              u"but it's preferable if you go for an option."))
+    ]
+
     question = models.CharField(max_length=200, null=False, blank=False)
     tweet_or_tt = models.Q(app_label='tweets', model='tweet') | models.Q(app_label='tweets', model='trendingtopic')
     content_type = models.ForeignKey(ContentType, limit_choices_to=tweet_or_tt)
@@ -78,6 +88,8 @@ class Question(UpdatedCreatedModel):
         total_objects = self.content_type.model_class().objects.all().count()
         return total_objects - user_answers
 
+    def help_text(self):
+        return self.HELP_TEXTS[self.answer_value_type][1]
 
 
 class Answer(UpdatedCreatedModel):
@@ -89,7 +101,7 @@ class Answer(UpdatedCreatedModel):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    value_type = models.PositiveSmallIntegerField(blank=False, null=False, choices=ANSWER_VALUE_TYPES)
+    value_type = models.PositiveSmallIntegerField(blank=False, null=False, choices=Question.ANSWER_VALUE_TYPES)
     value_int = models.IntegerField(null=True, blank=True)
     value_str = models.CharField(max_length=100, null=True, blank=True)
     value_bool = models.NullBooleanField()
