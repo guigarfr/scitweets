@@ -36,7 +36,8 @@ class TweetAnswerListView(LoginRequiredMixin, ScitweetsContextMixin, ListView):
 
     def get_queryset(self):
         tweet_type = ContentType.objects.get_for_model(models.Tweet)
-        return self.model.objects.filter(content_type=tweet_type, user=self.request.user.profile)
+        self.queryset = self.model.objects.filter(content_type=tweet_type, user=self.request.user.profile)
+        return self.queryset
 
     def get_context_data(self, **kwargs):
         context = {
@@ -52,7 +53,8 @@ class TrendingTopicAnswerListView(LoginRequiredMixin, ScitweetsContextMixin, Lis
 
     def get_queryset(self):
         trendingtopic_type = ContentType.objects.get_for_model(models.TrendingTopic)
-        return self.model.objects.filter(content_type=trendingtopic_type, user=self.request.user.profile)
+        self.queryset = self.model.objects.filter(content_type=trendingtopic_type, user=self.request.user.profile)
+        return self.queryset
 
     def get_context_data(self, **kwargs):
         context = {

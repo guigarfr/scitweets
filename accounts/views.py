@@ -79,7 +79,7 @@ class ScitweetsContextMixin(object):
 
         print "Menu context: ", context
 
-        return context
+        return super(ScitweetsContextMixin, self).get_context_data(**context)
 
 
 class DashboardView(LoginRequiredMixin, ScitweetsContextMixin, TemplateView):
