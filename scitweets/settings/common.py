@@ -26,7 +26,7 @@ PROJECT_ROOT = BASE_DIR
 SECRET_KEY = 'r^^3n&5tm(qis0$h3g)l=ob*8%e)8==o!4!yxg@-a)02s1pka5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djangobower',
     'compressor',
     'accounts',
     'tweets',
@@ -146,16 +145,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-    'djangobower.finders.BowerFinder',
 )
 
-
-BOWER_INSTALLED_APPS = (
-    'jquery',
-    'underscore',
-    'startbootstrap-sb-admin-2',
-    'dropzone'
-)
 
 # Example template: http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/index.html
 
@@ -168,13 +159,17 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'scitweets',
-        'USER': 'macintosh',
-        'PASSWORD': '',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
-        'PORT': '',
-    }
-}
+
+ADMINS = (('Guille Scitweets','guigarfr+scitweets@gmail.com'),)
+
+MANAGERS = ADMINS
+
+
+# Google email
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'guigarfr@gmail.com'
+EMAIL_HOST_PASSWORD = 'mbjiszeasdnpxtho'
+
+

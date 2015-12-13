@@ -1,11 +1,18 @@
-from .base import *
+import platform
 
-try:
-    from .production import *
-except ImportError:
-    pass
+computer = platform.node()
 
-try:
-    from .local import *
-except ImportError:
-    pass
+if 'finestral' in computer:
+    print "** Loading local settings"
+    try:
+        from .local import *
+    except ImportError:
+        pass
+
+else:
+    print "** Loading production settings"
+    try:
+        from .production import *
+    except ImportError:
+        pass
+
