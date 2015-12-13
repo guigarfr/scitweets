@@ -16,7 +16,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scitweets.settings")
 application = get_wsgi_application()
 
 
-from django.core.wsgi import get_wsgi_application
-from dj_static import Cling
-
-application = Cling(get_wsgi_application())
+if 'ON_HEROKU' in os.environ:
+    from dj_static import Cling
+    application = Cling(get_wsgi_application())
