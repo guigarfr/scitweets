@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^tts/voted/$', views.TrendingTopicAnswerListView.as_view(), name='trendingtopics_voted'),
 
     url(r'^questions/$', views.QuestionListView.as_view(), name='tweet_question_list'),
-    url(r'^answers/(?P<question_id>\d+)/new/$', views.CreateAnswerView.as_view(), name='tweet_answer_new')
+    url(r'^answers/(?P<question_id>\d+)/new/$', views.CreateAnswerView.as_view(), name='tweet_answer_new'),
+    url(r'^answers/(?P<question_id>\d+)/(?P<answer_id>\d+)/$', views.UpdateAnswerView.as_view(), name='tweet_answer_edit')
 ]

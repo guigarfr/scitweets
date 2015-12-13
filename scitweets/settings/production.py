@@ -5,11 +5,10 @@ from common import *
 SECRET_KEY = 'r^^3n&5tm(qis0$h3g)l=ob*8%e)8==o!4!yxg@-a)02s1pka5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
-
 
 
 # Database
@@ -28,3 +27,4 @@ DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+

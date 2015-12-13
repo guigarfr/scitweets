@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # from django.contrib import messages
 import json
-from django.views.generic import CreateView, ListView, FormView
+from django.views.generic import CreateView, ListView, FormView, UpdateView
 from braces.views import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy
 from django.contrib import messages
@@ -130,6 +130,42 @@ class CreateAnswerView(LoginRequiredMixin, ScitweetsContextMixin, CreateView):
         context['answered_count'] = self.about_object_class.objects.filter(
             answers__user=self.request.user.profile).count()
         assert(self.about_object_class.objects.all().count() ==
+               (context['unanswered_count'] + context['answered_count']))
+        return context
+
+
+class UpdateAnswerView(LoginRequiredMixin, ScitweetsContextMixin, UpdateView):
+    model = models.Answer
+    template_name = 'tweets/vote.html'
+    form_class = forms.CreateAnswerForm
+    redirect_unauthenticated_users = True
+    question = None
+    about_object = None
+    about_object_class = None
+    object = None
+    pk_url_kwarg = 'answer_id'
+
+    def get_initial(self):
+        initials = dict()
+        if self.about_object:
+            initials.update({
+                "object_id": self.object.pk,
+                "question": self.object.question.pk,
+            })
+
+            initials.update(super(UpdateAnswerView, self).get_initial())
+
+        return initials
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UpdateAnswerView, self).get_context_data(*args, **kwargs)
+        context['question'] = self.object.question
+        about_class = self.object.content_type.model_class()
+        context['unanswered_count'] = about_class.objects.exclude(
+            answers__user=self.request.user.profile).count()
+        context['answered_count'] = about_class.objects.filter(
+            answers__user=self.request.user.profile).count()
+        assert(about_class.objects.all().count() ==
                (context['unanswered_count'] + context['answered_count']))
         return context
 
