@@ -1,4 +1,3 @@
-import os
 from common import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
