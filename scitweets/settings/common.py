@@ -139,13 +139,28 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 STATIC_URL = '/static/'
 
-BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
+
+
+# BOWER
+
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
+
+STATICFILES_FINDERS += (
+    'djangobower.finders.BowerFinder',
+)
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'underscore',
+    'startbootstrap-sb-admin-2',
+    'dropzone'
+)
+
 
 
 # Example template: http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/index.html
