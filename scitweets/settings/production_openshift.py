@@ -30,15 +30,25 @@ ALLOWED_HOSTS = [
 
 
 DATABASES = {
-    'default': {
+    'mysql': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'scitweets',
+        'USER': 'adminEfWzUeS',
+        'PASSWORD': 'Nr-Fc5dvmNBk',
+        'HOST': os.environ.get('OPENSHIFT_MYSQL_DB_HOST'),
+        'PORT': os.environ.get('OPENSHIFT_MYSQL_DB_PORT'),
+    },
+    'postgres': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'scitweets',
-        'USER': 'admintbcccqh',
-        'PASSWORD': 'ZSvK6HHXG4xa',
+        'USER': 'admincxesnj6',
+        'PASSWORD': '9nrlxSRhn7RY',
         'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
         'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT'),
     }
 }
+
+DATABASES['default'] = DATABASES['postgres']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
