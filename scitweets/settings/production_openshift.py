@@ -31,9 +31,12 @@ ALLOWED_HOSTS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        # GETTING-STARTED: change 'db.sqlite3' to your sqlite3 database:
-        'NAME': os.path.join(DATA_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'scitweets',
+        'USER': 'admintbcccqh',
+        'PASSWORD': 'ZSvK6HHXG4xa',
+        'HOST': os.environ.get('OPENSHIFT_POSTGRESQL_DB_HOST'),
+        'PORT': os.environ.get('OPENSHIFT_POSTGRESQL_DB_PORT'),
     }
 }
 
