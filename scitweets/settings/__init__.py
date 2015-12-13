@@ -1,6 +1,5 @@
-import os
+from os import environ
 import platform
-
 computer = platform.node()
 
 if 'finestral' in computer:
@@ -12,10 +11,8 @@ if 'finestral' in computer:
 
 else:
 
-
     # NOTA: heroku config:set ON_HEROKU=1 --app myapp
-
-    if 'ON_HEROKU' in os.environ:
+    if 'ON_HEROKU' in environ:
         print "** Loading HEROKU production settings"
         try:
             from .production_heroku import *
@@ -24,7 +21,7 @@ else:
 
 
     # NOTA: rhc set-env ON_OPENSHIFT=1 -a myapp
-    if 'ON_OPENSHIFT' in os.environ:
+    if 'ON_OPENSHIFT' in environ:
         print "** Loading OPENSHIFT production settings"
         try:
             from .production_openshift import *
