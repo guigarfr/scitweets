@@ -9,7 +9,7 @@ from os import environ
 #     except ImportError:
 #         pass
 
-loaded_settings = True
+loaded_settings = False
 
 # NOTA: heroku config:set ON_HEROKU=1 --app myapp
 if 'ON_HEROKU' in environ:
