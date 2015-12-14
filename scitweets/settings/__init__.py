@@ -18,6 +18,7 @@ if 'ON_HEROKU' in environ:
         from .production_heroku import *
         loaded_settings = True
     except ImportError:
+        print "Error importing HEROKU settings!"
         pass
 
 
@@ -26,8 +27,9 @@ if 'ON_OPENSHIFT' in environ:
     print "** Loading OPENSHIFT production settings"
     try:
         from .production_openshift import *
-    except ImportError:
         loaded_settings = True
+    except ImportError:
+        print "Error importing OPENSHIFT settings!"
         pass
 
 if not loaded_settings:
