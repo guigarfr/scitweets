@@ -92,6 +92,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'scitweets.urls'
@@ -110,7 +111,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'scitweets.context_processors.site_name'
+                'scitweets.context_processors.site_name',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.tz',
             ],
         },
     },
@@ -124,7 +129,7 @@ WSGI_APPLICATION = 'scitweets.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -142,7 +147,7 @@ LANGUAGES = [
 ]
 
 LOCALE_PATHS = [
-    os.path.join(PROJECT_ROOT, 'locale'),
+    os.path.join(PROJECT_ROOT, 'locale/'),
 ]
 
 
