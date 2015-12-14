@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-14 11:00+0000\n"
-"PO-Revision-Date: 2015-12-14 11:01+0000\n"
+"POT-Creation-Date: 2015-12-14 22:52+0000\n"
+"PO-Revision-Date: 2015-12-14 22:53+0000\n"
 "Last-Translator:   <guigarfr@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -56,11 +56,11 @@ msgstr "Votar Tweets"
 msgid "Vote Trending Topics"
 msgstr "Votar Trending Topics"
 
-#: scitweets/settings/common.py:140
+#: scitweets/settings/common.py:145
 msgid "English"
 msgstr "Inglés"
 
-#: scitweets/settings/common.py:141
+#: scitweets/settings/common.py:146
 msgid "Spanish"
 msgstr "Español"
 
@@ -98,6 +98,10 @@ msgstr ""
 "\n"
 " %(percentage)s%% Completa"
 
+#: templates/base.html:124
+msgid "See all tasks"
+msgstr "Ver todas las tareas"
+
 #: templates/base.html:203 templates/blank.html:260
 msgid "User Profile"
 msgstr "Perfil de Usuario"
@@ -110,31 +114,31 @@ msgstr "Preferencias"
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: templates/base.html:243
+#: templates/base.html:277
 msgid "Dashboard"
 msgstr "Panel principal"
 
-#: templates/base.html:250 tweets/templates/tweets/question-list.html:15
+#: templates/base.html:284 tweets/templates/tweets/question-list.html:15
 msgid "Questions"
 msgstr "Preguntas"
 
-#: templates/base.html:257
+#: templates/base.html:291
 msgid "Tweets"
 msgstr "Tweets"
 
-#: templates/base.html:263 templates/base.html.py:291
+#: templates/base.html:297 templates/base.html.py:325
 msgid "List"
 msgstr "Lista"
 
-#: templates/base.html:268 templates/base.html.py:296
+#: templates/base.html:302 templates/base.html.py:330
 msgid "Voted"
 msgstr "Votados"
 
-#: templates/base.html:274
+#: templates/base.html:308
 msgid "Import"
 msgstr "Importar"
 
-#: templates/base.html:285
+#: templates/base.html:319
 msgid "Trending Topics"
 msgstr "Trending Topics"
 
@@ -194,13 +198,16 @@ msgstr "Votar Tuit"
 
 #: tweets/templates/tweets/answer-new.html:12
 #: tweets/templates/tweets/vote.html:12
-#| msgid "Tweet Vote"
 msgid "Tweet Poll"
 msgstr "Encuesta de tuits"
 
 #: tweets/templates/tweets/answer-new.html:17
 msgid "Vote this tweet"
 msgstr "Vota este tuit"
+
+#: tweets/templates/tweets/answer-new.html:56
+msgid "Statistics"
+msgstr "Estadísticas"
 
 #: tweets/templates/tweets/answer-new.html:92
 #: tweets/templates/tweets/vote.html:129
@@ -275,7 +282,6 @@ msgid "Trending topic list"
 msgstr "Lista de temas del momento"
 
 #: tweets/templates/tweets/list_trendingtopic.html:45
-#| msgid "Trending topic list"
 msgid "Trending Topic list"
 msgstr "Lista de temas del momento"
 
@@ -286,6 +292,11 @@ msgstr "Fecha de creación"
 #: tweets/templates/tweets/list_trendingtopic.html:55
 msgid "Trending topic"
 msgstr "Tema del momento"
+
+#: tweets/templates/tweets/question-list.html:34
+#| msgid "My answer"
+msgid "to answer"
+msgstr "por contestar"
 
 #: tweets/templates/tweets/question-list.html:44
 msgid "Start voting"
