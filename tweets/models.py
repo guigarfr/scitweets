@@ -54,7 +54,7 @@ class Question(UpdatedCreatedModel):
     HELP_TEXTS = [
         (0, None),
         (1, None),
-        (2, _(u"Give your oppinion about this question. "
+        (2, _(u"Give your opinion about this question. "
               u"Answer YES or NO, or click the UNKNOWN button in case you cannot decrypt the content "
               u"or you don't understand it. If you do, but are greatly unsure, you can also click UNKNOWN "
               u"but it's preferable if you go for an option."))
