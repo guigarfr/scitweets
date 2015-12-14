@@ -13,7 +13,7 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
@@ -28,5 +28,21 @@ urlpatterns = [
     url(r'^tweets/', include('tweets.urls', namespace="tweets", app_name='tweets')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('accounts.urls', namespace="accounts")),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
+
+# i18n urls
+urlpatterns += patterns(
+        '',
+        (r'^i18n/', include('django.conf.urls.i18n')),
+    )
+
+# Rosetta urls
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += patterns(
+        '',
+        url(r'^rosetta/', include('rosetta.urls')),
+    )
+
+# static urls
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

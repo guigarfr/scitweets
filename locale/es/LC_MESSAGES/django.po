@@ -1,0 +1,322 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-14 11:00+0000\n"
+"PO-Revision-Date: 2015-12-14 11:01+0000\n"
+"Last-Translator:   <guigarfr@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.7.8\n"
+
+#: accounts/templates/accounts/login.html:6
+#: accounts/templates/accounts/register.html:6 templates/blank.html:6
+msgid "Base Menu"
+msgstr "Menú Base"
+
+#: accounts/templates/accounts/login.html:56
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: accounts/templates/accounts/login.html:59
+msgid "Password"
+msgstr "Contraseña"
+
+#: accounts/templates/accounts/login.html:63
+msgid "Remember Me"
+msgstr "Recuérdame"
+
+#: accounts/templates/accounts/login.html:67
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: accounts/templates/accounts/login.html:73
+msgid "Register"
+msgstr "Registrarse"
+
+#: accounts/templates/accounts/register.html:47
+msgid "Register new user"
+msgstr "Registrar nuevo usuario"
+
+#: accounts/views.py:47
+msgid "Vote Tweets"
+msgstr "Votar Tweets"
+
+#: accounts/views.py:62
+msgid "Vote Trending Topics"
+msgstr "Votar Trending Topics"
+
+#: scitweets/settings/common.py:140
+msgid "English"
+msgstr "Inglés"
+
+#: scitweets/settings/common.py:141
+msgid "Spanish"
+msgstr "Español"
+
+#: templates/admin/base_site.html:3
+msgid "Django site admin"
+msgstr "Sitio de administración de Django"
+
+#: templates/base.html:13
+msgid "Toggle navigation"
+msgstr "Cambiar tipo de navegación"
+
+#: templates/base.html:18 templates/home.html:6
+msgid "Science Tweets"
+msgstr "Tweets Científicos"
+
+#: templates/base.html:95
+#, python-format
+msgctxt "task"
+msgid ""
+"\n"
+"                                            %(percentage)s%% Complete\n"
+"                                        "
+msgstr ""
+"\n"
+" %(percentage)s%% Completa"
+
+#: templates/base.html:110
+#, python-format
+msgctxt "task"
+msgid ""
+"\n"
+"                                                %(percentage)s%% Complete\n"
+"                                            "
+msgstr ""
+"\n"
+" %(percentage)s%% Completa"
+
+#: templates/base.html:203 templates/blank.html:260
+msgid "User Profile"
+msgstr "Perfil de Usuario"
+
+#: templates/base.html:205 templates/blank.html:262
+msgid "Settings"
+msgstr "Preferencias"
+
+#: templates/base.html:208 templates/blank.html:265
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: templates/base.html:243
+msgid "Dashboard"
+msgstr "Panel principal"
+
+#: templates/base.html:250 tweets/templates/tweets/question-list.html:15
+msgid "Questions"
+msgstr "Preguntas"
+
+#: templates/base.html:257
+msgid "Tweets"
+msgstr "Tweets"
+
+#: templates/base.html:263 templates/base.html.py:291
+msgid "List"
+msgstr "Lista"
+
+#: templates/base.html:268 templates/base.html.py:296
+msgid "Voted"
+msgstr "Votados"
+
+#: templates/base.html:274
+msgid "Import"
+msgstr "Importar"
+
+#: templates/base.html:285
+msgid "Trending Topics"
+msgstr "Trending Topics"
+
+#: tweets/forms.py:13
+msgid "Select a file"
+msgstr "Selecciona un fichero"
+
+#: tweets/forms.py:28
+msgid "Select file"
+msgstr "Selecciona fichero"
+
+#: tweets/forms.py:55
+msgid "Enter your answer"
+msgstr "Introduce tu respuesta"
+
+#: tweets/models.py:49
+msgid "Integer"
+msgstr "Entero"
+
+#: tweets/models.py:50
+msgid "String"
+msgstr "Cadena de caracteres"
+
+#: tweets/models.py:51
+msgid "Boolean"
+msgstr "Booleano"
+
+#: tweets/models.py:57
+msgid ""
+"Give your oppinion about this question. Answer YES or NO, or click the "
+"UNKNOWN button in case you cannot decrypt the content or you don't "
+"understand it. If you do, but are greatly unsure, you can also click UNKNOWN"
+" but it's preferable if you go for an option."
+msgstr ""
+"Da tu opinión sobre esta pregunta. Responde SI, NO o pulsa el botón ? en "
+"caso de que no entiendas o puedas descifrar el contenido del texto. Si lo "
+"entiendes pero tienes muchas dudas, también puedes marcar interrogante, pero"
+" es preferible que te decidas por una opción."
+
+#: tweets/models.py:121 tweets/templates/tweets/answer-new.html:89
+#: tweets/templates/tweets/vote.html:126
+msgid "Unanswered"
+msgstr "Sin respuesta"
+
+#: tweets/models.py:124
+msgid "Yes"
+msgstr "Sí"
+
+#: tweets/models.py:126
+msgid "No"
+msgstr "No"
+
+#: tweets/templates/tweets/answer-new.html:7
+#: tweets/templates/tweets/vote.html:7
+msgid "Tweet Vote"
+msgstr "Votar Tuit"
+
+#: tweets/templates/tweets/answer-new.html:12
+#: tweets/templates/tweets/vote.html:12
+#| msgid "Tweet Vote"
+msgid "Tweet Poll"
+msgstr "Encuesta de tuits"
+
+#: tweets/templates/tweets/answer-new.html:17
+msgid "Vote this tweet"
+msgstr "Vota este tuit"
+
+#: tweets/templates/tweets/answer-new.html:92
+#: tweets/templates/tweets/vote.html:129
+msgid "Answered"
+msgstr "Respondidas"
+
+#: tweets/templates/tweets/answer_list.html:8
+#: tweets/templates/tweets/list.html:7
+#: tweets/templates/tweets/list_trendingtopic.html:7
+#: tweets/templates/tweets/question-list.html:9
+msgid "Tweet List"
+msgstr "Lista de tuits"
+
+#: tweets/templates/tweets/answer_list.html:41
+msgid "Voted tweet list"
+msgstr "Lista de tuits votados"
+
+#: tweets/templates/tweets/answer_list.html:48
+#, python-format
+msgid ""
+"\n"
+"                    List of tweets voted by %(username)s\n"
+"                    "
+msgstr ""
+"\n"
+"Lista de tuits votados por %(username)s"
+
+#: tweets/templates/tweets/answer_list.html:61
+msgid "Voting date"
+msgstr "Fecha de votación"
+
+#: tweets/templates/tweets/answer_list.html:63
+#: tweets/templates/tweets/list.html:54
+msgid "Twitter ID"
+msgstr "ID de Twitter"
+
+#: tweets/templates/tweets/answer_list.html:64
+#: tweets/templates/tweets/list.html:55
+msgid "Tweet"
+msgstr "Tuit"
+
+#: tweets/templates/tweets/answer_list.html:67
+msgid "TrendingTopic"
+msgstr "Tema del Momento"
+
+#: tweets/templates/tweets/answer_list.html:69
+msgid "My answer"
+msgstr "Mi respuesta"
+
+#: tweets/templates/tweets/import_tweets.html:10
+msgid "Import tweets"
+msgstr "Importar tuits"
+
+#: tweets/templates/tweets/import_tweets.html:21
+msgid "Process file"
+msgstr "Procesar fichero"
+
+#: tweets/templates/tweets/list.html:40
+msgid "Tweet list"
+msgstr "Lista de tuits"
+
+#: tweets/templates/tweets/list.html:45
+msgid "List of loaded tweets"
+msgstr "Lista de tuits cargados"
+
+#: tweets/templates/tweets/list.html:56
+msgid "Scientific"
+msgstr "Científico"
+
+#: tweets/templates/tweets/list_trendingtopic.html:40
+msgid "Trending topic list"
+msgstr "Lista de temas del momento"
+
+#: tweets/templates/tweets/list_trendingtopic.html:45
+#| msgid "Trending topic list"
+msgid "Trending Topic list"
+msgstr "Lista de temas del momento"
+
+#: tweets/templates/tweets/list_trendingtopic.html:54
+msgid "Creation date"
+msgstr "Fecha de creación"
+
+#: tweets/templates/tweets/list_trendingtopic.html:55
+msgid "Trending topic"
+msgstr "Tema del momento"
+
+#: tweets/templates/tweets/question-list.html:44
+msgid "Start voting"
+msgstr "Empieza a votar"
+
+#: tweets/templates/tweets/question-list.html:51
+msgid "Completed!"
+msgstr "Completada!"
+
+#: tweets/templates/tweets/vote.html:19
+#, python-format
+msgid ""
+"\n"
+"                    Vote this %(object_name)s\n"
+"                "
+msgstr ""
+"\n"
+"Vota este %(object_name)s"
+
+#: tweets/templates/tweets/vote.html:69
+msgid "Error: Unknown value type"
+msgstr "Error: Tipo de valor desconocido"
+
+#: tweets/views.py:257
+msgid " and "
+msgstr "y"
+
+#: tweets/views.py:268
+msgid "File field is required"
+msgstr "El campo de fichero es obligatorio"
+
+#: tweets/views.py:273
+msgid "There was no data we could process in this file"
+msgstr "No se encontró data que procesar en este fichero"

@@ -30,6 +30,9 @@ else
     echo "bower estaba instalado"
 fi
 
+# Instalar psycopg2
+#sudo apt-get install python-psycopg2
+
 # Instalar los requirements del proyecto
 echo "Install requirements..."
 pip install -r requirements.txt

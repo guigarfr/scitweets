@@ -22,17 +22,14 @@ INSTALLED_APPS += (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'scitweets',
-        'USER': 'macintosh',
-        'PASSWORD': '',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
-        'PORT': '',
+        'NAME': os.environ.get('DB_NAME', 'scitweets'),
+        'USER': os.environ.get('DB_USERNAME', 'macintosh'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'macintosh'),
+        'HOST': os.environ.get('LOCAL_DB_IP', 'localhost'),                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
+        'PORT': os.environ.get('LOCAL_DB_PORT', ''),
     }
 }
 
-# # Parse database configuration from $DATABASE_URL
-# import dj_database_url
-# DATABASES['default'] =  dj_database_url.config(default='postgres://macintosh@localhost:5432/scitweets')
-#
 
-
+# Rosetta
+ROSETTA_WSGI_AUTO_RELOAD = True

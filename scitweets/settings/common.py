@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.utils.translation import ugettext_lazy as _
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'compressor',
+    'rosetta',
     'accounts',
     'tweets',
     'lib',
@@ -130,6 +133,24 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Languages configuration
+LANGUAGES = [
+    ('en', _('English')),
+    ('es', _('Spanish')),
+]
+
+LOCALE_PATHS = [
+    os.path.join(PROJECT_ROOT, 'locale'),
+]
+
+
+# Rosetta
+ROSETTA_GOOGLE_TRANSLATE = True # If true, pip install goslate
+ROSETTA_MESSAGES_SOURCE_LANGUAGE_CODE = 'en'
+ROSETTA_MESSAGES_SOURCE_LANGUAGE_NAME = 'English'
+ROSETTA_WSGI_AUTO_RELOAD = False # False is recommended for production
 
 
 # Static files (CSS, JavaScript, Images)

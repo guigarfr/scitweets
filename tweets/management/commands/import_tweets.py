@@ -1,4 +1,4 @@
-#coding: utf8
+# -*- encoding: utf-8 -*-
 
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone

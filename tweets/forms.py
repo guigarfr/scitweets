@@ -52,7 +52,7 @@ class CreateAnswerForm(forms.ModelForm):
         for key in self.fields:
             self.fields[key].widget.attrs.update(
                 {'class': 'form-control',
-                 'placeholder': ugettext("Introduce tu respuesta")
+                 'placeholder': ugettext("Enter your answer")
                  })
 
     def general_fields(self):
