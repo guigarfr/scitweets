@@ -36,4 +36,10 @@
 {% block header %}
 {% endblock header %}
 
+{% block sidebar %}
+{% if user.is_staff %}
+    {{ block.super }}
+{% endif %}
+{% endblock sidebar %}
+
 {% block footer %}{% endblock %}

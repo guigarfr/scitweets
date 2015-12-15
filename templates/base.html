@@ -19,242 +19,255 @@
         </div>
         <!-- /.navbar-header -->
 
+
         <ul class="nav navbar-top-links navbar-right">
 
-            {% if user.is_authenticated %}
+            {% block top_navigation_links %}
 
-            {% if False %}
+                {% if user.is_authenticated %}
 
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-messages">
-                    <li>
-                        <a href="#">
-                            <div>
-                                <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                            </div>
-                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                    {% if False %}
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                            </div>
-                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                            </div>
-                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a class="text-center" href="#">
-                            <strong>Read All Messages</strong>
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-messages -->
-            </li>
-
-            {% endif %}
-
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-tasks">
-                    {% for task in tasks %}
-                    <li>
-                        <a href="{{ task.href|default:'#' }}">
-                            <div>
-                                {% with task.percentage as percentage %}
-                                <p>
-                                    <strong>{{ task.name }}</strong>
-                                    <span class="pull-right text-muted">
-                                        {% blocktrans context "task" %}
-                                            {{ percentage }}% Complete
-                                        {% endblocktrans %}
-                                    </span>
-                                </p>
-                                {% if task.description %}
-                                <p>
-                                    <i>{{ task.description }}</i>
-                                </p>
-                                {% endif %}
-
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
-                                         aria-valuemin="0" aria-valuemax="100" style="width:{{ percentage }}%;">
-                                        <span class="sr-only">
-                                            {% blocktrans context "task" %}
-                                                {{ percentage }}% Complete
-                                            {% endblocktrans %}
-                                        </span>
-                                    </div>
-                                </div>
-                                {% endwith %}
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    {% endfor %}
-                    <li>
-                        <a class="text-center" href="#">
-                            <strong>{% trans "See all tasks" %}</strong>
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-tasks -->
-            </li>
-
-            {% if False %}
-
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-comment fa-fw"></i> New Comment
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-tasks fa-fw"></i> New Task
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a class="text-center" href="#">
-                            <strong>See All Alerts</strong>
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-alerts -->
-            </li>
-
-            {% endif %}
-
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> {% trans 'User Profile' %}</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> {% trans 'Settings' %}</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Logout' %}</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-
-            </li>
-
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                {% get_current_language as LANGUAGE_CODE %}
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-language"></i>
-                    <i class="fa fa-caret-down"></i>
-                </a>
-
-                <ul class="dropdown-menu dropdown-lang">
-
-                    <!-- Language form -->
-                    <form name="lang_form" action="{% url 'set_language' %}" method="post">
-                        {% csrf_token %}
-                        <input name="next" type="hidden" value=""/>
-                        <input name="language" type="hidden"/>
-                    </form>
-
-                    {% get_available_languages as LANGUAGES %}
-                    {% get_language_info_list for LANGUAGES as languages %}
-                    {% for language in languages %}
-                        {% if language.code != LANGUAGE_CODE %}
+                        <ul class="dropdown-menu dropdown-messages">
                             <li>
-                                <a onclick="document.lang_form.language.value='{{ language.code }}'; document.lang_form.submit();">
-                                    {{ language.name_local.title }}
+                                <a href="#">
+                                    <div>
+                                        <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                                 </a>
                             </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-                <!-- /.dropdown-language -->
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>Read All Messages</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-messages -->
+                    </li>
 
-            </li>
+                    {% endif %}
 
-            {% endif %}
-            <!-- /.dropdown -->
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-tasks">
+                            {% for task in tasks %}
+                            <li>
+                                <a href="{{ task.href|default:'#' }}">
+                                    <div>
+                                        {% with task.percentage as percentage %}
+                                        <p>
+                                            <strong>{{ task.name }}</strong>
+                                            <span class="pull-right text-muted">
+                                                {% blocktrans context "task" %}
+                                                    {{ percentage }}% Complete
+                                                {% endblocktrans %}
+                                            </span>
+                                        </p>
+                                        {% if task.description %}
+                                        <p>
+                                            <i>{{ task.description }}</i>
+                                        </p>
+                                        {% endif %}
+
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width:{{ percentage }}%;">
+                                                <span class="sr-only">
+                                                    {% blocktrans context "task" %}
+                                                        {{ percentage }}% Complete
+                                                    {% endblocktrans %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        {% endwith %}
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            {% endfor %}
+                            <li>
+                                <a class="text-center" href="{{ all_tasks_href|default:'#' }}">
+                                    <strong>{% trans "See all tasks" %}</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-tasks -->
+                    </li>
+
+                    {% if False %}
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> New Comment
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-tasks fa-fw"></i> New Task
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-alerts -->
+                    </li>
+
+                    {% endif %}
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> {% trans 'User Profile' %}</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> {% trans 'Settings' %}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Logout' %}</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+
+                    </li>
+
+                    {% get_available_languages as LANGUAGES %}
+
+                    {% if LANGUAGES.length > 1 %}
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-language"></i>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-lang">
+
+                            <!-- Language form -->
+                            <form name="lang_form" action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value=""/>
+                                <input name="language" type="hidden"/>
+                            </form>
+
+
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                {% if language.code != LANGUAGE_CODE %}
+                                    <li>
+                                        <a onclick="document.lang_form.language.value='{{ language.code }}'; document.lang_form.submit();">
+                                            {{ language.name_local.title }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <!-- /.dropdown-language -->
+
+                    </li>
+                    {% endif %}
+
+                {% endif %}
+                <!-- /.dropdown -->
+
+            {% endblock top_navigation_links %}
         </ul>
         <!-- /.navbar-top-links -->
 
         {% if user.is_authenticated %}
 
+        {% block sidebar %}
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
+
+                    {% block side_navigation_links %}
 
                     {% if False %}
                     <li class="sidebar-search">
@@ -412,11 +425,15 @@
                         <!--</ul>-->
                         <!--&lt;!&ndash; /.nav-second-level &ndash;&gt;-->
                     <!--</li>-->
+
+                    {% endblock side_navigation_links %}
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
         </div>
         <!-- /.navbar-static-side -->
+
+        {% endblock sidebar %}
 
         {% endif %}
 
@@ -424,7 +441,7 @@
 
     {% if user.is_authenticated %}
         <!-- Page Content -->
-        <div id="page-wrapper">
+        <div {% if user.is_staff %}id="page-wrapper" {% endif %}>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
