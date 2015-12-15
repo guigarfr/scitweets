@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 
-from accounts.views import DashboardView
+from accounts.views import HomeRedirectView, DashboardView
 
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$', DashboardView.as_view()),
+    url(r'^$', HomeRedirectView.as_view()),
     url(r'^dashboard/', DashboardView.as_view(), name="dashboard"),
     url(r'^tweets/', include('tweets.urls', namespace="tweets", app_name='tweets')),
     url(r'^admin/', include(admin.site.urls)),

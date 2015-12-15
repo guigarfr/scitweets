@@ -74,12 +74,26 @@ class ScitweetsContextMixin(object):
             })
 
         context['tasks'] = tasks
+        context['all_tasks_href'] = reverse("tweets:tweet_question_list")
 
         context.update(kwargs)
 
         print "Menu context: ", context
 
         return super(ScitweetsContextMixin, self).get_context_data(**context)
+
+
+class HomeRedirectView(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'article-detail'
+
+    def get_redirect_url(self, *args, **kwargs):
+        if self.request.user.is_staff:
+            self.pattern_name = 'dashboard'
+        else:
+            self.pattern_name = 'tweets:tweet_question_list'
+        return super(HomeRedirectView, self).get_redirect_url(*args, **kwargs)
 
 
 class DashboardView(LoginRequiredMixin, ScitweetsContextMixin, TemplateView):
@@ -122,7 +136,7 @@ class LoginView(FormView):
     """
     Provides the ability to login as a user with a username and password
     """
-    success_url = reverse_lazy('dashboard')
+    success_url = "/"
     form_class = AuthenticationForm
     redirect_field_name = REDIRECT_FIELD_NAME
     template_name = 'accounts/login.html'
@@ -147,7 +161,7 @@ class LoginView(FormView):
         return super(LoginView, self).form_valid(form)
 
     def get_success_url(self):
-        redirect_to = self.request.REQUEST.get(self.redirect_field_name)
+        redirect_to = self.request.GET.get(self.redirect_field_name)
         if not is_safe_url(url=redirect_to, host=self.request.get_host()):
             redirect_to = self.success_url
         return redirect_to
