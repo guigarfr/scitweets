@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-15 19:48+0000\n"
-"PO-Revision-Date: 2015-12-15 19:50+0000\n"
+"POT-Creation-Date: 2015-12-15 20:11+0000\n"
+"PO-Revision-Date: 2015-12-15 20:12+0000\n"
 "Last-Translator:   <guigarfr@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -57,6 +57,10 @@ msgid "Vote Trending Topics"
 msgstr "Votar Trending Topics"
 
 #: scitweets/settings/common.py:145
+msgid "English"
+msgstr "Inglés"
+
+#: scitweets/settings/common.py:146
 msgid "Spanish"
 msgstr "Español"
 
@@ -74,11 +78,6 @@ msgstr "Tweets Científicos"
 
 #: templates/base.html:98
 #, python-format
-#| msgctxt "task"
-#| msgid ""
-#| "\n"
-#| "                                                %(percentage)s%% Complete\n"
-#| "                                            "
 msgctxt "task"
 msgid ""
 "\n"
@@ -90,11 +89,6 @@ msgstr ""
 
 #: templates/base.html:113
 #, python-format
-#| msgctxt "task"
-#| msgid ""
-#| "\n"
-#| "                                                %(percentage)s%% Complete\n"
-#| "                                            "
 msgctxt "task"
 msgid ""
 "\n"
@@ -120,31 +114,31 @@ msgstr "Preferencias"
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: templates/base.html:290
+#: templates/base.html:289
 msgid "Dashboard"
 msgstr "Panel principal"
 
-#: templates/base.html:297 tweets/templates/tweets/question-list.html:15
+#: templates/base.html:296 tweets/templates/tweets/question-list.html:15
 msgid "Questions"
 msgstr "Preguntas"
 
-#: templates/base.html:304
+#: templates/base.html:303
 msgid "Tweets"
 msgstr "Tweets"
 
-#: templates/base.html:310 templates/base.html.py:338
+#: templates/base.html:309 templates/base.html.py:337
 msgid "List"
 msgstr "Lista"
 
-#: templates/base.html:315 templates/base.html.py:343
+#: templates/base.html:314 templates/base.html.py:342
 msgid "Voted"
 msgstr "Votados"
 
-#: templates/base.html:321
+#: templates/base.html:320
 msgid "Import"
 msgstr "Importar"
 
-#: templates/base.html:332
+#: templates/base.html:331
 msgid "Trending Topics"
 msgstr "Trending Topics"
 
@@ -173,7 +167,7 @@ msgid "Boolean"
 msgstr "Booleano"
 
 #: tweets/models.py:109 tweets/templates/tweets/answer-new.html:89
-#: tweets/templates/tweets/vote.html:145
+#: tweets/templates/tweets/vote.html:139
 msgid "Unanswered"
 msgstr "Sin respuesta"
 
@@ -204,7 +198,7 @@ msgid "Statistics"
 msgstr "Estadísticas"
 
 #: tweets/templates/tweets/answer-new.html:92
-#: tweets/templates/tweets/vote.html:148
+#: tweets/templates/tweets/vote.html:142
 msgid "Answered"
 msgstr "Respondidas"
 
@@ -301,10 +295,6 @@ msgstr "Completada!"
 
 #: tweets/templates/tweets/vote.html:19
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                    Vote this %(object_name)s\n"
-#| "                "
 msgid ""
 "\n"
 "                Vote this %(object_name)s\n"
@@ -313,27 +303,32 @@ msgstr ""
 "\n"
 "Vota este %(object_name)s"
 
-#: tweets/templates/tweets/vote.html:69 tweets/templates/tweets/vote.html:99
+#: tweets/templates/tweets/vote.html:69 tweets/templates/tweets/vote.html:94
 msgid "Error: Unknown value type"
 msgstr "Error: Tipo de valor desconocido"
 
-#: tweets/templates/tweets/vote.html:89
+#: tweets/templates/tweets/vote.html:84
 #, python-format
 #| msgid ""
-#| "Give your opinion about this question. Answer YES or NO, or click the "
-#| "UNKNOWN button in case you cannot decrypt the content or you don't "
-#| "understand it. If you do, but are greatly unsure, you can also click UNKNOWN"
-#| " but it's preferable if you go for an option."
+#| "\n"
+#| "                    Regarding this %(object_name)s, answer the question:\n"
+#| "                    <emph>\"%(question)s\"</emph>\n"
+#| "                    .\n"
+#| "                    Answer YES (tick) or NO (cross), or click the UNKNOWN (question mark) button in case you\n"
+#| "                    cannot decrypt the content or you don't understand it.\n"
+#| "                    If you do, but are greatly unsure, you can also click UNKNOWN\n"
+#| "                    but it's preferable if you go for an option.\n"
+#| "                    "
 msgid ""
 "\n"
-"                    Regarding this %(object_name)s, answer the question:\n"
-"                    <emph>\"%(question)s\"</emph>\n"
-"                    .\n"
-"                    Answer YES (tick) or NO (cross), or click the UNKNOWN (question mark) button in case you\n"
-"                    cannot decrypt the content or you don't understand it.\n"
-"                    If you do, but are greatly unsure, you can also click UNKNOWN\n"
-"                    but it's preferable if you go for an option.\n"
-"                    "
+"                            Regarding this %(object_name)s, answer the question:\n"
+"                            <emph>\"%(question)s\"</emph>\n"
+"                            .\n"
+"                            Answer YES (tick) or NO (cross), or click the UNKNOWN (question mark) button in case you\n"
+"                            cannot decrypt the content or you don't understand it.\n"
+"                            If you do, but are greatly unsure, you can also click UNKNOWN\n"
+"                            but it's preferable if you go for an option.\n"
+"                            "
 msgstr ""
 "\n"
 "En relación a este %(object_name)s, responde a la pregunta:\n"
@@ -341,20 +336,17 @@ msgstr ""
 ".\n"
 "Responde SI (tick), NO (cruz). Marca interrogante si no puedes descrifrar el contenido o si no lo entiendes. Si lo entiendes pero tienes muchas dudas, también puedes marcar interrogante, pero es preferible que te decidas por una opción."
 
-#: tweets/views.py:257
+#: tweets/views.py:256
 msgid " and "
 msgstr "y"
 
-#: tweets/views.py:268
+#: tweets/views.py:267
 msgid "File field is required"
 msgstr "El campo de fichero es obligatorio"
 
-#: tweets/views.py:273
+#: tweets/views.py:272
 msgid "There was no data we could process in this file"
 msgstr "No se encontró data que procesar en este fichero"
-
-#~ msgid "English"
-#~ msgstr "Inglés"
 
 #~ msgctxt "task"
 #~ msgid ""
