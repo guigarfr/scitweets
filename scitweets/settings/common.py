@@ -142,7 +142,6 @@ USE_TZ = True
 
 # Languages configuration
 LANGUAGES = [
-    ('en', _('English')),
     ('es', _('Spanish')),
 ]
 
