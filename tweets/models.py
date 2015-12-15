@@ -51,15 +51,6 @@ class Question(UpdatedCreatedModel):
         (2, _(u"Boolean"))
     ]
 
-    HELP_TEXTS = [
-        (0, None),
-        (1, None),
-        (2, _(u"Give your opinion about this question. "
-              u"Answer YES or NO, or click the UNKNOWN button in case you cannot decrypt the content "
-              u"or you don't understand it. If you do, but are greatly unsure, you can also click UNKNOWN "
-              u"but it's preferable if you go for an option."))
-    ]
-
     question = models.CharField(max_length=200, null=False, blank=False)
     tweet_or_tt = models.Q(app_label='tweets', model='tweet') | models.Q(app_label='tweets', model='trendingtopic')
     content_type = models.ForeignKey(ContentType, limit_choices_to=tweet_or_tt)
@@ -87,9 +78,6 @@ class Question(UpdatedCreatedModel):
         user_answers = Answer.objects.filter(question=self, user=user).count()
         total_objects = self.content_type.model_class().objects.all().count()
         return total_objects - user_answers
-
-    def help_text(self):
-        return self.HELP_TEXTS[self.answer_value_type][1]
 
 
 class Answer(UpdatedCreatedModel):

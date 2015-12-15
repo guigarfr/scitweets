@@ -4,7 +4,7 @@
 {% load staticfiles %}
 
 {% block page_title %}
-    {{ block.super }} {{ _("Tweet Vote") }}
+{{ block.super }} {{ _("Tweet Vote") }}
 {% endblock %}
 
 {% block content %}
@@ -17,61 +17,61 @@
             {% with question.content_type as object_name %}
             <div class="panel-heading">
                 {% blocktrans %}
-                    Vote this {{ object_name }}
+                Vote this {{ object_name }}
                 {% endblocktrans %}
             </div>
             <div class="panel-body">
                 {% if not object %}
-                    <h1>All {{ object_name }}s have been voted</h1>
+                <h1>All {{ object_name }}s have been voted</h1>
                 {% else %}
-                    <h2>{{ object }}</h2>
+                <h2>{{ object }}</h2>
 
-                    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-                    <div class="wrapper text-center">
-                        <p>{{ question.question }}</p>
-                        <br>
+                <div class="wrapper text-center">
+                    <p>{{ question.question }}</p>
+                    <br>
 
-                        {% with question.answer_value_type as value_type %}
-                            <form action="" method="post">{% csrf_token %}
+                    {% with question.answer_value_type as value_type %}
+                    <form action="" method="post">{% csrf_token %}
 
-                                {% for field in form.hidden_fields %}
-                                    {{ field }}
-                                {% endfor %}
+                        {% for field in form.hidden_fields %}
+                        {{ field }}
+                        {% endfor %}
 
-                                {% if value_type == 0 %}
-                                    <div class="form-group text-center">
-                                        {{ form.value_int }}
-                                    </div>
-                                {% elif value_type == 1 %}
-                                    <div class="form-group text-center">
-                                        {{ form.value_str }}
-                                    </div>
-                                {% elif value_type == 2 %}
-                                    <div class="btn-group text-center">
-                                        <button id='select-yes'
-                                                class="btn btn-success btn-circle btn-xl"
-                                                type="button">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                        <button id='select-na'
-                                                class="btn btn-warning btn-circle btn-xl"
-                                                type="button">
-                                            <i class="fa fa-question"></i>
-                                        </button>
-                                        <button id='select-no'
-                                                class="btn btn-danger btn-circle btn-xl"
-                                                type="button">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                {% else %}
-                                    ### {% trans "Error: Unknown value type" %} ###
-                                {% endif %}
-                        </form>
-                        {% endwith %}
-                        <br>
-                    </div>
+                        {% if value_type == 0 %}
+                        <div class="form-group text-center">
+                            {{ form.value_int }}
+                        </div>
+                        {% elif value_type == 1 %}
+                        <div class="form-group text-center">
+                            {{ form.value_str }}
+                        </div>
+                        {% elif value_type == 2 %}
+                        <div class="btn-group text-center">
+                            <button id='select-yes'
+                                    class="btn btn-success btn-circle btn-xl"
+                                    type="button">
+                                <i class="fa fa-check"></i>
+                            </button>
+                            <button id='select-na'
+                                    class="btn btn-warning btn-circle btn-xl"
+                                    type="button">
+                                <i class="fa fa-question"></i>
+                            </button>
+                            <button id='select-no'
+                                    class="btn btn-danger btn-circle btn-xl"
+                                    type="button">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                        {% else %}
+                        ### {% trans "Error: Unknown value type" %} ###
+                        {% endif %}
+                    </form>
+                    {% endwith %}
+                    <br>
+                </div>
                 {% endif %}
             </div>
             {% endwith %}
@@ -80,7 +80,25 @@
             <div class="panel-footer">
                 {% if question.help_text %}
                 <small class="text-muted">
-                    {{ question.help_text }}
+                    {% with question.answer_value_type as value_type %}
+                    {% if value_type == 0 %}
+
+                    {% elif value_type == 1 %}
+
+                    {% elif value_type == 2 %}
+                    {% blocktrans with question.content_type as object_name %}
+                    Regarding this {{ object_name }}, answer the question:
+                    <emph>"{{ question }}"</emph>
+                    .
+                    Answer YES (tick) or NO (cross), or click the UNKNOWN (question mark) button in case you
+                    cannot decrypt the content or you don't understand it.
+                    If you do, but are greatly unsure, you can also click UNKNOWN
+                    but it's preferable if you go for an option.
+                    {% endblocktrans %}
+                    {% else %}
+                    ### {% trans "Error: Unknown value type" %} ###
+                    {% endif %}
+                    {% endwith %}
                 </small>
                 {% endif %}
             </div>
@@ -108,80 +126,92 @@
 
 
 {% block js %}
-    {{ block.super }}
+{{ block.super }}
 
-    <!-- Flot Charts JavaScript -->
-    <script src="{% static 'flot/excanvas.min.js' %}"></script>
-    <script src="{% static 'flot/jquery.flot.js' %}"></script>
-    <script src="{% static 'flot/jquery.flot.pie.js' %}"></script>
-    <script src="{% static 'flot/jquery.flot.resize.js' %}"></script>
-    <script src="{% static 'flot/jquery.flot.time.js' %}"></script>
-    <script src="{% static 'flot.tooltip/js/jquery.flot.tooltip.min.js' %}"></script>
+<!-- Flot Charts JavaScript -->
+<script src="{% static 'flot/excanvas.min.js' %}"></script>
+<script src="{% static 'flot/jquery.flot.js' %}"></script>
+<script src="{% static 'flot/jquery.flot.pie.js' %}"></script>
+<script src="{% static 'flot/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'flot/jquery.flot.time.js' %}"></script>
+<script src="{% static 'flot.tooltip/js/jquery.flot.tooltip.min.js' %}"></script>
 
-    <script type='text/javascript'>
-        //Flot Pie Chart
-        $(function() {
+<script type='text/javascript'>
+    //Flot Pie Chart
+    $(function () {
 
-            var data = [{
-                label: "{% trans 'Unanswered' %}",
-                data: {{ unanswered_count }}
-            }, {
-                label: "{% trans 'Answered' %}",
-                data: {{ answered_count }}
-            }];
+        var data;
+        data = [{
+            label: "{% trans 'Unanswered' %}",
+            data: "{{unanswered_count}}",
+        }, {
+            label: "{% trans 'Answered' %}",
+            data: "{{ answered_count }}",
+        }];
 
-            function labelFormatter(label, series) {
-                return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>"
-            + label + "<br/>" + Math.round(series.percent) + "%</div>";
-            }
+        function labelFormatter(label, series) {
+            return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>"
+                    + label + "<br/>" + Math.round(series.percent) + "%</div>";
+        }
 
-            var plotObj = $.plot($("#flot-pie-chart"), data, {
-                series: {
-                    pie: {
+        var plotObj = $.plot($("#flot-pie-chart"), data, {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    label: {
                         show: true,
-                        radius: 1,
-                        label: {
-                            show: true,
-                            radius: 2/3,
-                            formatter: labelFormatter,
-                            threshold: 0.1
-                        }
+                        radius: 2 / 3,
+                        formatter: labelFormatter,
+                        threshold: 0.1
                     }
-                },
-                grid: {
-                    hoverable: true
-                },
-                legend: {
-                    show: false
-                },
-                tooltip: true,
-                tooltipOpts: {
-                    content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
-                    shifts: {
-                        x: 20,
-                        y: 0
-                    },
-                    defaultTheme: false
                 }
-            });
+            },
+            grid: {
+                hoverable: true
+            },
+            legend: {
+                show: false
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                shifts: {
+                    x: 20,
+                    y: 0
+                },
+                defaultTheme: false
+            }
+        });
 
-        });
-    </script>
+    })
+    ;
+</script>
 
-    <script type='text/javascript'>
-        //Send Form using buttons
-        $("#select-yes").click(function() {
-            $("input[name='value_bool']").val("1");
-            $("form").submit()
-        });
-        $("#select-no").click(function() {
-            $("input[name='value_bool']").val("0");
-            $("form").submit()
-        });
-        $("#select-na").click(function() {
-            $("input[name='value_bool']").val("");
-            $("form").submit()
-        });
-    </script>
+<script type='text/javascript'>
+
+    function disable_all_buttons() {
+        $("#select-yes").prop("disabled", true);
+        $("#select-no").prop("disabled", true);
+        $("#select-na").prop("disabled", true);
+    }
+
+    //Send Form using buttons
+    $("#select-yes").click(function () {
+        disable_all_buttons();
+        $("input[name='value_bool']").val("1");
+        $("form").submit();
+    });
+    $("#select-no").click(function () {
+        disable_all_buttons();
+        $("input[name='value_bool']").val("0");
+        $("form").submit();
+    });
+    $("#select-na").click(function () {
+        disable_all_buttons();
+        $("input[name='value_bool']").val("");
+        $("form").submit();
+    });
+</script>
 
 {% endblock %}
