@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-14 22:52+0000\n"
-"PO-Revision-Date: 2015-12-14 22:53+0000\n"
+"POT-Creation-Date: 2015-12-15 19:48+0000\n"
+"PO-Revision-Date: 2015-12-15 19:50+0000\n"
 "Last-Translator:   <guigarfr@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -57,10 +57,6 @@ msgid "Vote Trending Topics"
 msgstr "Votar Trending Topics"
 
 #: scitweets/settings/common.py:145
-msgid "English"
-msgstr "Inglés"
-
-#: scitweets/settings/common.py:146
 msgid "Spanish"
 msgstr "Español"
 
@@ -76,69 +72,79 @@ msgstr "Cambiar tipo de navegación"
 msgid "Science Tweets"
 msgstr "Tweets Científicos"
 
-#: templates/base.html:95
+#: templates/base.html:98
 #, python-format
+#| msgctxt "task"
+#| msgid ""
+#| "\n"
+#| "                                                %(percentage)s%% Complete\n"
+#| "                                            "
 msgctxt "task"
 msgid ""
 "\n"
-"                                            %(percentage)s%% Complete\n"
-"                                        "
+"                                                    %(percentage)s%% Complete\n"
+"                                                "
 msgstr ""
 "\n"
 " %(percentage)s%% Completa"
 
-#: templates/base.html:110
+#: templates/base.html:113
 #, python-format
+#| msgctxt "task"
+#| msgid ""
+#| "\n"
+#| "                                                %(percentage)s%% Complete\n"
+#| "                                            "
 msgctxt "task"
 msgid ""
 "\n"
-"                                                %(percentage)s%% Complete\n"
-"                                            "
+"                                                        %(percentage)s%% Complete\n"
+"                                                    "
 msgstr ""
 "\n"
 " %(percentage)s%% Completa"
 
-#: templates/base.html:124
+#: templates/base.html:127
 msgid "See all tasks"
 msgstr "Ver todas las tareas"
 
-#: templates/base.html:203 templates/blank.html:260
+#: templates/base.html:206 templates/blank.html:260
 msgid "User Profile"
 msgstr "Perfil de Usuario"
 
-#: templates/base.html:205 templates/blank.html:262
+#: templates/base.html:208 templates/blank.html:262
 msgid "Settings"
 msgstr "Preferencias"
 
-#: templates/base.html:208 templates/blank.html:265
+#: templates/base.html:211 templates/blank.html:265
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: templates/base.html:277
+#: templates/base.html:290
 msgid "Dashboard"
 msgstr "Panel principal"
 
-#: templates/base.html:284 tweets/templates/tweets/question-list.html:15
+#: templates/base.html:297 tweets/templates/tweets/question-list.html:15
 msgid "Questions"
 msgstr "Preguntas"
 
-#: templates/base.html:291
+#: templates/base.html:304
 msgid "Tweets"
 msgstr "Tweets"
 
-#: templates/base.html:297 templates/base.html.py:325
+#: templates/base.html:310 templates/base.html.py:338
 msgid "List"
 msgstr "Lista"
 
-#: templates/base.html:302 templates/base.html.py:330
+#: templates/base.html:315 templates/base.html.py:343
 msgid "Voted"
 msgstr "Votados"
 
-#: templates/base.html:308
+#: templates/base.html:321
 msgid "Import"
 msgstr "Importar"
 
-#: templates/base.html:319
+#: templates/base.html:332
 msgid "Trending Topics"
 msgstr "Trending Topics"
 
@@ -166,28 +172,16 @@ msgstr "Cadena de caracteres"
 msgid "Boolean"
 msgstr "Booleano"
 
-#: tweets/models.py:57
-msgid ""
-"Give your opinion about this question. Answer YES or NO, or click the "
-"UNKNOWN button in case you cannot decrypt the content or you don't "
-"understand it. If you do, but are greatly unsure, you can also click UNKNOWN"
-" but it's preferable if you go for an option."
-msgstr ""
-"Da tu opinión sobre esta pregunta. Responde SI, NO o pulsa el botón ? en "
-"caso de que no entiendas o puedas descifrar el contenido del texto. Si lo "
-"entiendes pero tienes muchas dudas, también puedes marcar interrogante, pero"
-" es preferible que te decidas por una opción."
-
-#: tweets/models.py:121 tweets/templates/tweets/answer-new.html:89
-#: tweets/templates/tweets/vote.html:126
+#: tweets/models.py:109 tweets/templates/tweets/answer-new.html:89
+#: tweets/templates/tweets/vote.html:145
 msgid "Unanswered"
 msgstr "Sin respuesta"
 
-#: tweets/models.py:124
+#: tweets/models.py:112
 msgid "Yes"
 msgstr "Sí"
 
-#: tweets/models.py:126
+#: tweets/models.py:114
 msgid "No"
 msgstr "No"
 
@@ -210,7 +204,7 @@ msgid "Statistics"
 msgstr "Estadísticas"
 
 #: tweets/templates/tweets/answer-new.html:92
-#: tweets/templates/tweets/vote.html:129
+#: tweets/templates/tweets/vote.html:148
 msgid "Answered"
 msgstr "Respondidas"
 
@@ -294,7 +288,6 @@ msgid "Trending topic"
 msgstr "Tema del momento"
 
 #: tweets/templates/tweets/question-list.html:34
-#| msgid "My answer"
 msgid "to answer"
 msgstr "por contestar"
 
@@ -308,17 +301,45 @@ msgstr "Completada!"
 
 #: tweets/templates/tweets/vote.html:19
 #, python-format
+#| msgid ""
+#| "\n"
+#| "                    Vote this %(object_name)s\n"
+#| "                "
 msgid ""
 "\n"
-"                    Vote this %(object_name)s\n"
+"                Vote this %(object_name)s\n"
 "                "
 msgstr ""
 "\n"
 "Vota este %(object_name)s"
 
-#: tweets/templates/tweets/vote.html:69
+#: tweets/templates/tweets/vote.html:69 tweets/templates/tweets/vote.html:99
 msgid "Error: Unknown value type"
 msgstr "Error: Tipo de valor desconocido"
+
+#: tweets/templates/tweets/vote.html:89
+#, python-format
+#| msgid ""
+#| "Give your opinion about this question. Answer YES or NO, or click the "
+#| "UNKNOWN button in case you cannot decrypt the content or you don't "
+#| "understand it. If you do, but are greatly unsure, you can also click UNKNOWN"
+#| " but it's preferable if you go for an option."
+msgid ""
+"\n"
+"                    Regarding this %(object_name)s, answer the question:\n"
+"                    <emph>\"%(question)s\"</emph>\n"
+"                    .\n"
+"                    Answer YES (tick) or NO (cross), or click the UNKNOWN (question mark) button in case you\n"
+"                    cannot decrypt the content or you don't understand it.\n"
+"                    If you do, but are greatly unsure, you can also click UNKNOWN\n"
+"                    but it's preferable if you go for an option.\n"
+"                    "
+msgstr ""
+"\n"
+"En relación a este %(object_name)s, responde a la pregunta:\n"
+"<emph>\"%(question)s\"</emph>\n"
+".\n"
+"Responde SI (tick), NO (cruz). Marca interrogante si no puedes descrifrar el contenido o si no lo entiendes. Si lo entiendes pero tienes muchas dudas, también puedes marcar interrogante, pero es preferible que te decidas por una opción."
 
 #: tweets/views.py:257
 msgid " and "
@@ -331,3 +352,15 @@ msgstr "El campo de fichero es obligatorio"
 #: tweets/views.py:273
 msgid "There was no data we could process in this file"
 msgstr "No se encontró data que procesar en este fichero"
+
+#~ msgid "English"
+#~ msgstr "Inglés"
+
+#~ msgctxt "task"
+#~ msgid ""
+#~ "\n"
+#~ "                                            %(percentage)s%% Complete\n"
+#~ "                                        "
+#~ msgstr ""
+#~ "\n"
+#~ " %(percentage)s%% Completa"
