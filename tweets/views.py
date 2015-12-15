@@ -64,8 +64,7 @@ class TrendingTopicAnswerListView(LoginRequiredMixin, ScitweetsContextMixin, Lis
         return super(TrendingTopicAnswerListView, self).get_context_data(**context)
 
 
-
-class QuestionListView(ListView):
+class QuestionListView(LoginRequiredMixin, ScitweetsContextMixin, ListView):
     model = models.Question
     template_name = 'tweets/question-list.html'
 
