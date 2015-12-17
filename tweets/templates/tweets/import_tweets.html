@@ -7,7 +7,10 @@
 
 <div>
 
-    <h3>{% trans "Import tweets" %}</h3>
+    {% trans "Import data file" as default_title %}
+
+
+    <h3>{{ page_title|default:default_title }}</h3>
 
     <br>
 

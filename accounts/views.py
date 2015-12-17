@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import CreateView, FormView, RedirectView, TemplateView
 from braces.views import LoginRequiredMixin
+from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import FormMixin
 from tweets.models import Tweet, Question, TrendingTopic
 from django.http import HttpResponseRedirect
@@ -18,7 +19,7 @@ from django.http import HttpResponseRedirect
 from .forms import UserCreateForm
 
 
-class ScitweetsContextMixin(object):
+class ScitweetsContextMixin(TemplateResponseMixin):
 
     def get_context_data(self, **kwargs):
         context = dict()

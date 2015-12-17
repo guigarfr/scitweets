@@ -7,6 +7,16 @@
 {{ block.super }} {{ _("Tweet Vote") }}
 {% endblock %}
 
+{% block css %}
+    {{ block.super }}
+    <style type="text/css">
+        .my-button-style .btn {
+            margin-right: 15px;
+            margin-left: 15px;
+        }
+    </style>
+{% endblock css %}
+
 {% block content %}
 
 <h1 class="page-header">{% trans 'Tweet Poll' %}</h1>
@@ -24,20 +34,22 @@
                 {% if not object %}
                 <h1>All {{ object_name }}s have been voted</h1>
                 {% else %}
-                <h2>{{ object }}</h2>
+                <h2 style="min-height: 150px;">{{ object }}</h2>
 
                 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
                 <div class="wrapper text-center">
-                    <p>{{ question.question }}</p>
+                    <h3>{{ question.question }}</h3>
                     <br>
 
                     {% with question.answer_value_type as value_type %}
                     <form action="" method="post">{% csrf_token %}
 
-                        {% for field in form.hidden_fields %}
-                        {{ field }}
-                        {% endfor %}
+                        <div id="fields-div" style="display:none">
+                            {% for field in form.hidden_fields %}
+                                {{ field }}
+                            {% endfor %}
+                        </div>
 
                         {% if value_type == 0 %}
                         <div class="form-group text-center">
@@ -48,7 +60,7 @@
                             {{ form.value_str }}
                         </div>
                         {% elif value_type == 2 %}
-                        <div class="btn-group text-center">
+                        <div class="text-center my-button-style">
                             <button id='select-yes'
                                     class="btn btn-success btn-circle btn-xl"
                                     type="button">
@@ -78,7 +90,7 @@
             <!-- /.panel-body-->
 
             <div class="panel-footer">
-                <small class="text-muted">
+                <div class="text-muted">
                     {% with question.answer_value_type as value_type %}
                         {% if value_type == 2 %}
                             {% blocktrans with question.content_type as object_name %}
@@ -94,7 +106,7 @@
                             ### {% trans "Error: Unknown value type" %} ###
                         {% endif %}
                     {% endwith %}
-                </small>
+                </div>
             </div>
             <!-- /.panel-footer -->
         </div>
