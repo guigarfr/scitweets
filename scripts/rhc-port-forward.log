@@ -1,0 +1,15 @@
+Checking available ports ... done
+Forwarding ports ...
+Address already in use - bind(2) while forwarding port 8080. Trying local port 8081
+
+To connect to a service running on OpenShift, use the Local address
+
+Service    Local               OpenShift
+---------- -------------- ---- ----------------
+httpd      127.0.0.1:8080  =>  127.9.3.129:8080
+httpd      127.0.0.1:8081  =>  127.9.3.130:8080
+mysql      127.0.0.1:3306  =>  127.9.3.131:3306
+postgresql 127.0.0.1:5432  =>  127.9.3.132:5432
+
+Press CTRL-C to terminate port forwarding
+ Ending port forward
