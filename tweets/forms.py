@@ -28,6 +28,7 @@ class UploadFileForm(forms.Form):
                  'placeholder': ugettext("Select file")
                  })
 
+
 class CreateAnswerForm(forms.ModelForm):
     class Meta:
         model = models.Answer
