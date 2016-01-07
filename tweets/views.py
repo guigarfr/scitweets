@@ -286,8 +286,6 @@ class TweetImportFormView(LoginRequiredMixin, ScitweetsContextMixin, FormView):
         context['page_title'] = ugettext_lazy(u"Import tweets")
         context.update(kwargs)
 
-        print "HI, context", context
-
         return super(TweetImportFormView, self).get_context_data(**context)
 
 
@@ -296,7 +294,7 @@ class TrendingTopicImportFormView(LoginRequiredMixin, ScitweetsContextMixin, For
     form_class = forms.UploadFileForm
 
     def get_success_url(self):
-        return reverse('tweets:tweet_list')
+        return reverse('tweets:trendingtopic_list')
 
     def parse_json_file(self, json_file):
         raw_data = json_file.read()
@@ -308,7 +306,6 @@ class TrendingTopicImportFormView(LoginRequiredMixin, ScitweetsContextMixin, For
         tt_imported = tt_found = tt_failure_format = tt_failure_other = 0
 
         for text_tt in text_file:
-            print "Trending topic line:", text_tt
 
             if not text_tt:
                 continue
@@ -320,23 +317,21 @@ class TrendingTopicImportFormView(LoginRequiredMixin, ScitweetsContextMixin, For
                 tt_failure_format += 1
                 continue
 
-            tt_id = tt_array[0]
-            tt_text = tt_array[1]
-            tt_time = tt_array[2]
-            tt_url = tt_array[3]
+            # tt_foo = tt_array[0]
+            tt_unicode_text = tt_array[1].decode('utf-8')
+            # tt_time = tt_array[2]
+            # tt_url = tt_array[3]
 
             # Check for existing tweet or create new one
             try:
-                _ = models.TrendingTopic.objects.get(id_twitter=int(tt_id))
-                tt_found += 1
-            except models.TrendingTopic.DoesNotExist:
-                try:
-                    new_tt = models.TrendingTopic(id_twitter=int(tt_id), text=unicode(tt_text))
-                    new_tt.save()
+                _, created = models.TrendingTopic.objects.get_or_create(text=tt_unicode_text)
+                if created:
                     tt_imported += 1
-                except Exception, e:
-                    send_manually_exception_email(self.request, e)
-                    tt_failure_other += 1
+                else:
+                    tt_found += 1
+            except Exception, e:
+                send_manually_exception_email(self.request, e)
+                tt_failure_other += 1
 
         imported_tts = {
             'imported': tt_imported,
@@ -388,7 +383,5 @@ class TrendingTopicImportFormView(LoginRequiredMixin, ScitweetsContextMixin, For
         context = dict()
         context['page_title'] = ugettext_lazy(u"Import trending topics")
         context.update(kwargs)
-
-        print "HI, context", context
 
         return super(TrendingTopicImportFormView, self).get_context_data(**context)
