@@ -303,31 +303,40 @@ class TrendingTopicImportFormView(LoginRequiredMixin, ScitweetsContextMixin, For
 
         return raw_data
 
-    def parse_trending_topic_data_from_text_array(self, text_array):
+    def parse_trending_topic_data_from_text_file(self, text_file):
 
         tt_imported = tt_found = tt_failure_format = tt_failure_other = 0
-        for text_tt in text_array:
+
+        for text_tt in text_file:
             print "Trending topic line:", text_tt
-            # tweet_text = json_tweet.get('text', None)
-            # tweet_id = json_tweet.get('id', None)
-            #
-            # # Check for needed fields
-            # if tweet_text is None or tweet_id is None:
-            #     tweet_failure_format += 1
-            #     continue
-            #
-            # # Check for existing tweet or create new one
-            # try:
-            #     _ = models.Tweet.objects.get(id_twitter=int(json_tweet['id']))
-            #     tweet_found += 1
-            # except models.Tweet.DoesNotExist:
-            #     try:
-            #         new_tweet = models.Tweet(id_twitter=int(tweet_id), text=unicode(tweet_text))
-            #         new_tweet.save()
-            #         tweet_imported += 1
-            #     except Exception, e:
-            #         send_manually_exception_email(self.request, e)
-            #         tweet_failure_other += 1
+
+            if not text_tt:
+                continue
+
+            tt_array = text_tt.split('\t')
+
+            # Check for needed fields
+            if len(tt_array) != 4:
+                tt_failure_format += 1
+                continue
+
+            tt_id = tt_array[0]
+            tt_text = tt_array[1]
+            tt_time = tt_array[2]
+            tt_url = tt_array[3]
+
+            # Check for existing tweet or create new one
+            try:
+                _ = models.TrendingTopic.objects.get(id_twitter=int(tt_id))
+                tt_found += 1
+            except models.TrendingTopic.DoesNotExist:
+                try:
+                    new_tt = models.TrendingTopic(id_twitter=int(tt_id), text=unicode(tt_text))
+                    new_tt.save()
+                    tt_imported += 1
+                except Exception, e:
+                    send_manually_exception_email(self.request, e)
+                    tt_failure_other += 1
 
         imported_tts = {
             'imported': tt_imported,
@@ -340,18 +349,18 @@ class TrendingTopicImportFormView(LoginRequiredMixin, ScitweetsContextMixin, For
         warning_text = u''
         if tt_imported:
             if not tt_found:
-                success_text = u"%(imported)d tweets were imported from file" % imported_tts
+                success_text = u"%(imported)d trending topics were imported from file" % imported_tts
             else:
-                success_text = u'%(imported)d tweets were imported from file and ' \
+                success_text = u'%(imported)d trending topics were imported from file and ' \
                                u'%(existing)d already existed in the database' % imported_tts
             messages.success(self.request, ugettext_lazy(success_text))
         else:
-            warning_text = u'No new tweets were created.'
+            warning_text = u'No new trending topics were created.'
 
         if tt_failure_format:
-            failure_text.append(u'There were %(failure_format)d tweets had format errors' % imported_tts)
+            failure_text.append(u'There were %(failure_format)d trending topics had format errors' % imported_tts)
         if tt_failure_other:
-            failure_text.append(u'%(failure_other)s tweets led to unexpected errors' % imported_tts)
+            failure_text.append(u'%(failure_other)s trending topics led to unexpected errors' % imported_tts)
 
         if failure_text:
             messages.error(self.request, ugettext_lazy(' and '.join(failure_text).capitalize()))
@@ -367,19 +376,12 @@ class TrendingTopicImportFormView(LoginRequiredMixin, ScitweetsContextMixin, For
         if form_file is None:
             messages.error(self.request, ugettext_lazy("File field is required"))
 
-        json_data = self.parse_json_file(form_file)
+        imported_trendingtopics = self.parse_trending_topic_data_from_text_file(form_file.file)
 
-        if json_data is None:
-            failure_text = ugettext_lazy(u'There was no data we could process in this file')
-            messages.error(self.request, failure_text)
-            return super(TweetImportFormView, self).form_invalid(form)
+        if not imported_trendingtopics:
+            return super(TrendingTopicImportFormView, self).form_invalid(form)
 
-        imported_tweets = self.parse_trending_topic_data_from_text_array(json_data)
-
-        if not imported_tweets:
-            return super(TweetImportFormView, self).form_invalid(form)
-
-        return super(TweetImportFormView, self).form_valid(form)
+        return super(TrendingTopicImportFormView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
 

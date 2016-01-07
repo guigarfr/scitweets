@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^tweets/voted/$', views.TweetAnswerListView.as_view(), name='tweets_voted'),
 
     url(r'^tts/list$$', views.TrendingTopicListView.as_view(), name='trendingtopic_list'),
+    url(r'^tts/import/$', views.TrendingTopicImportFormView.as_view(), name='trendingtopic_import'),
     url(r'^tts/voted/$', views.TrendingTopicAnswerListView.as_view(), name='trendingtopics_voted'),
 
     url(r'^questions/$', views.QuestionListView.as_view(), name='tweet_question_list'),

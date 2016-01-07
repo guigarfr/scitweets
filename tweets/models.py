@@ -34,6 +34,7 @@ class Tweet(UpdatedCreatedModel):
 
 
 class TrendingTopic(UpdatedCreatedModel):
+    id_twitter = models.BigIntegerField(blank=False, null=False)
     text = models.CharField(max_length=200, null=False, blank=False)
     answers = GenericRelation('Answer')
 
